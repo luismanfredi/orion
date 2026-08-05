@@ -21,4 +21,16 @@ class Matrix {
         double get(std::size_t r, std::size_t c) const{
             return data_.at(r).at(c);
         }
+
+         friend std::ostream& operator<<(std::ostream& os, const Matrix& mat) { 
+            for(std::size_t i = 0; i < mat.rows_; i++){
+                os << "|";
+
+                for(std::size_t j = 0; j < mat.cols_; j++){
+                    os << std::setw(4)<< mat.data_[i][j];
+                }
+            os << " |\n";
+            }
+            return os;
+        }
 };

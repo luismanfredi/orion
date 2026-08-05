@@ -41,4 +41,10 @@ class Matrix {
         std::size_t cols() const{
             return cols_;
         }
+
+        Matrix operator+(const Matrix&) const;
+
+        Matrix transpose() const;
+
+        double determinant() const;
 };

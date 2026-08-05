@@ -11,19 +11,7 @@ class Matrix {
         std::size_t cols_;
         std::vector<double> data_;
 
-        std::size_t index(std::size_t row, std::size_t col) const {
-            if(row >= rows_ || col >= cols_){
-                throw PositionNotInMatrix(
-                    "Position (" +
-                    std::to_string(row) + ", " +
-                    std::to_string(col) + 
-                    ") is outside matrix dimensions (" +
-                    std::to_string(rows_) + " x " +
-                    std::to_string(cols_) + ")."
-                );
-            }
-            return row * cols_ + col;
-        }
+        std::size_t index(std::size_t row, std::size_t col) const;
 
     public:
         Matrix(std::size_t r, std::size_t c);

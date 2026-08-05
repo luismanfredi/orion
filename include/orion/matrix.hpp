@@ -3,6 +3,7 @@
 #include <ostream>
 #include <vector>
 #include <iomanip>
+#include "exceptions.hpp"
 
 class Matrix {
     private:
@@ -10,7 +11,17 @@ class Matrix {
         std::size_t cols_;
         std::vector<double> data_;
 
-        std::size_t index(std::size_t row, std::size_t col) const{
+        std::size_t index(std::size_t row, std::size_t col) const {
+            if(row >= rows_ || col >= cols_){
+                throw PositionNotInMatrix(
+                    "Position (" +
+                    std::to_string(row) + ", " +
+                    std::to_string(col) + 
+                    ") is outside matrix dimensions (" +
+                    std::to_string(rows_) + " x " +
+                    std::to_string(cols_) + ")."
+                );
+            }
             return row * cols_ + col;
         }
 

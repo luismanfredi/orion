@@ -33,4 +33,24 @@ class Matrix {
             }
             return os;
         }
+
+        friend std::ostream& operator<<(std::ostream& os, const Matrix& mat) { 
+            for(std::size_t i = 0; i < mat.rows_; i++){
+                os << "|";
+
+                for(std::size_t j = 0; j < mat.cols_; j++){
+                    os << std::setw(4)<< mat.data_[i][j];
+                }
+            os << " |\n";
+            }
+            return os;
+        }
+
+        std::size_t rows() const{
+            return rows_;
+        }
+
+        std::size_t cols() const{
+            return cols_;
+        }
 };

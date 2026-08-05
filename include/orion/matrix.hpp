@@ -5,5 +5,12 @@
 #include <iomanip>
 
 class Matrix {
-    
+    private:
+        std::size_t rows_;
+        std::size_t cols_;
+        std::vector<std::vector<double>> data_;
+
+    public:
+
+        Matrix(std::size_t r, std::size_t c) : rows_(r), cols_(c), data_(r, std::vector<double>(c, 0.0)) {}
 };

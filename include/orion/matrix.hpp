@@ -16,13 +16,9 @@ class Matrix {
     public:
         Matrix(std::size_t r, std::size_t c);
 
-        void set(std::size_t r, std::size_t c, double val){
-            data_.at((index(r, c))) = val;
-        }
+        void set(std::size_t r, std::size_t c, double val);
 
-        double get(std::size_t r, std::size_t c) const{
-            return data_.at((index(r, c)));
-        }
+        double get(std::size_t r, std::size_t c) const;
 
         friend std::ostream& operator<<(std::ostream& os, const Matrix& mat) { 
             for(std::size_t i = 0; i < mat.rows_; i++){

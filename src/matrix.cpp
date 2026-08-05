@@ -21,3 +21,11 @@ std::size_t Matrix::index(std::size_t row, std::size_t col) const {
     }
     return row * cols_ + col;
 }
+
+void Matrix::set(std::size_t r, std::size_t c, double val){
+    data_[index(r, c)] = val;
+}
+
+double Matrix::get(std::size_t r, std::size_t c) const{
+    return data_[index(r, c)];
+}

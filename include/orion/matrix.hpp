@@ -26,7 +26,7 @@ class Matrix {
         }
 
     public:
-        Matrix(std::size_t r, std::size_t c) : rows_(r), cols_(c), data_(r * c, 0.0) {}
+        Matrix(std::size_t r, std::size_t c);
 
         void set(std::size_t r, std::size_t c, double val){
             data_.at((index(r, c))) = val;

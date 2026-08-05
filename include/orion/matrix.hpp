@@ -19,13 +19,8 @@ class Matrix {
         void set(std::size_t r, std::size_t c, double val);
         double get(std::size_t r, std::size_t c) const;
 
-        std::size_t rows() const{
-            return rows_;
-        }
-
-        std::size_t cols() const{
-            return cols_;
-        }
+        std::size_t rows() const;
+        std::size_t cols() const;
 
         Matrix operator+(const Matrix&) const;
         Matrix transpose() const;

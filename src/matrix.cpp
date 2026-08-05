@@ -29,3 +29,15 @@ void Matrix::set(std::size_t r, std::size_t c, double val){
 double Matrix::get(std::size_t r, std::size_t c) const{
     return data_[index(r, c)];
 }
+
+std::ostream& operator<<(std::ostream& os, const Matrix& mat) { 
+    for(std::size_t i = 0; i < mat.rows_; i++){
+        os << "|";
+
+        for(std::size_t j = 0; j < mat.cols_; j++){
+            os << std::setw(8)<< mat.get(i, j);
+        }
+    os << " |\n";
+    }
+    return os;
+}

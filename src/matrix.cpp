@@ -1,4 +1,4 @@
-#include "include/orion/matrix.hpp"
+#include "orion/matrix.hpp"
 
 #include <iomanip>
 #include <string>
@@ -10,7 +10,7 @@ Matrix::Matrix(std::size_t r, std::size_t c, double initial_value)
 
 Matrix::Matrix(std::initializer_list<std::initializer_list<double>> values) {
     rows_ = values.size();
-    if (rows == 0) {
+    if (rows_ == 0) {
         cols_ = 0;
         return;
     }

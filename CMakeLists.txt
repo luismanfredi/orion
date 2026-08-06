@@ -6,11 +6,14 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_executable(orion
-    src/main.cpp
+add_executable(orion_example
+    examples/basic.cpp
+    src/matrix.cpp
 )
 
-target_compile_options(orion PRIVATE 
+target_include_directories(orion_example PRIVATE include)
+
+target_compile_options(orion_example PRIVATE 
     -Wall  
     -Wextra 
     -Wpedantic)

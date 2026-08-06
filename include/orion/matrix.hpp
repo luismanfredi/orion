@@ -33,3 +33,5 @@ class Matrix {
 
         friend std::ostream& operator<<(std::ostream&, const Matrix&);
 };
+
+Matrix operator*(double scalar, const Matrix& matrix);

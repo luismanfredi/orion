@@ -120,6 +120,10 @@ Matrix Matrix::operator*(double scalar) const {
     return result;
 }
 
+Matrix operator*(double scalar, const Matrix& matrix){
+    return matrix * scalar;
+}
+
 Matrix Matrix::transpose() const{
     Matrix result(cols_, rows_);
 

@@ -24,7 +24,8 @@ class Matrix {
         std::size_t rows() const;
         std::size_t cols() const;
 
-        Matrix operator+(const Matrix&) const;
+        Matrix operator+(const Matrix& other) const;
+        Matrix operator-(const Matrix& other) const;
         Matrix transpose() const;
         double determinant() const;
 

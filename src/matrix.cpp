@@ -73,6 +73,21 @@ Matrix Matrix::operator+(const Matrix& other) const {
     return result;
 }
 
+Matrix Matrix::operator-(const Matrix& other) const {
+    if (rows_ != other.rows_ || cols_ != other.cols_) {
+        throw InvalidMatrixDimensions("Matrix must be same dimensions!");
+    }
+
+    Matrix result(rows_, cols_);
+
+    for (std::size_t i = 0; i < rows_; ++i) {
+        for (std::size_t j = 0; j < cols_; ++j) {
+            result.set(i, j, get(i, j) - other.get(i, j));
+        }
+    }
+    return result;
+}
+
 Matrix Matrix::transpose() const{
     Matrix result(cols_, rows_);
 

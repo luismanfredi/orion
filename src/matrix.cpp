@@ -29,7 +29,7 @@ Matrix::Matrix(std::initializer_list<std::initializer_list<double>> values) {
 }
 
 std::size_t Matrix::index(std::size_t row, std::size_t col) const {
-    if(row >= rows_ || col >= cols_) {
+    if (row >= rows_ || col >= cols_) {
         throw PositionNotInMatrix(
             "Position (" +
             std::to_string(row) + ", " +
@@ -56,6 +56,17 @@ std::size_t Matrix::rows() const {
 
 std::size_t Matrix::cols() const {
     return cols_;
+}
+
+Matrix Matrix::transpose() const{
+    Matrix result(cols_, rows_);
+
+    for (std::size_t i = 0; i < rows_; i++){
+        for (std::size_t j = 0; j < cols_; j++){
+            result.set(j, i, get(i, j));
+        }
+    }
+    return result;
 }
 
 std::ostream& operator<<(std::ostream& os, const Matrix& mat) { 

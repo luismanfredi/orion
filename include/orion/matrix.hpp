@@ -14,7 +14,7 @@ class Matrix {
         std::size_t index(std::size_t row, std::size_t col) const;
 
     public:
-        Matrix(std::size_t r, std::size_t c);
+        Matrix(std::size_t r, std::size_t c, double initial_value = 0.0);
 
         void set(std::size_t r, std::size_t c, double val);
         double get(std::size_t r, std::size_t c) const;

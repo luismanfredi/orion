@@ -3,10 +3,10 @@
 #include <iomanip>
 #include <string>
 
-Matrix::Matrix(std::size_t r, std::size_t c) 
+Matrix::Matrix(std::size_t r, std::size_t c, double initial_value) 
     : rows_(r), 
       cols_(c),
-      data_(r * c, 0.0) {}
+      data_(r * c, initial_value) {}
 
 std::size_t Matrix::index(std::size_t row, std::size_t col) const {
     if(row >= rows_ || col >= cols_){

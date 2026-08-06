@@ -65,8 +65,8 @@ Matrix Matrix::operator+(const Matrix& other) const {
 
     Matrix result(rows_, cols_);
 
-    for (std::size_t i = 0; i < rows_; i++) {
-        for (std::size_t j = 0; j < cols_; j++) {
+    for (std::size_t i = 0; i < rows_; ++i) {
+        for (std::size_t j = 0; j < cols_; ++j) {
             result.set(i, j, get(i, j) + other.get(i, j));
         }
     }
@@ -76,8 +76,8 @@ Matrix Matrix::operator+(const Matrix& other) const {
 Matrix Matrix::transpose() const{
     Matrix result(cols_, rows_);
 
-    for (std::size_t i = 0; i < rows_; i++){
-        for (std::size_t j = 0; j < cols_; j++){
+    for (std::size_t i = 0; i < rows_; ++i){
+        for (std::size_t j = 0; j < cols_; ++j){
             result.set(j, i, get(i, j));
         }
     }
@@ -85,10 +85,10 @@ Matrix Matrix::transpose() const{
 }
 
 std::ostream& operator<<(std::ostream& os, const Matrix& mat) { 
-    for (std::size_t i = 0; i < mat.rows_; i++) {
+    for (std::size_t i = 0; i < mat.rows_; ++i) {
         os << "|";
 
-        for (std::size_t j = 0; j < mat.cols_; j++) {
+        for (std::size_t j = 0; j < mat.cols_; ++j) {
             os << std::setw(8)<< mat.get(i, j);
         }
     os << " |\n";

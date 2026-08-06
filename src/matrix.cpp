@@ -88,6 +88,27 @@ Matrix Matrix::operator-(const Matrix& other) const {
     return result;
 }
 
+Matrix Matrix::operator*(const Matrix& other) const {
+    if (cols_ != other.rows_) {
+        throw InvalidMatrixDimensions(
+            "The number of columns of the first Matrix must be equal the number of rows of the second Matrix"
+        );
+    }
+
+    Matrix result(rows_, other.cols_);
+
+    for (std::size_t i = 0; i < rows_; i++) {
+        for (std::size_t j = 0; j < other.cols_; j++) {
+            double sum = 0;
+            for (std::size_t k = 0; k < cols_; k++) {
+                sum += get(i, k) * other.get(k, j);
+            }
+            result .set(i, j, sum);
+        }
+    }
+    return result;
+}
+
 Matrix Matrix::transpose() const{
     Matrix result(cols_, rows_);
 

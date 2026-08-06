@@ -41,26 +41,16 @@ Run the executable:
 ### Linux /macOS
 
 ```bash
-./build/orion
+./build/orion_example
 ```
 
 ### Windows
 
 ```powershell
-.build\debug\orion.exe
+.build\debug\orion_example.exe
 ```
 
 *(The output may vary depending on your generator)*
-
-## Current Features
-
-- Matrix addition
-- Matrix subtraction
-- Matrix multiplication
-- Matrix transpose
-- Matrix determinant (3×3)
-
-More linear algebra operations will be added as the project evolves.
 
 ## Author
 **Luís Antonio Manfredi Sodré**

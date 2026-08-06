@@ -109,6 +109,17 @@ Matrix Matrix::operator*(const Matrix& other) const {
     return result;
 }
 
+Matrix Matrix::operator*(double scalar) const {
+    Matrix result(rows_, cols_);
+
+    for (std::size_t i = 0; i < rows_; ++i) {
+        for (std::size_t j = 0; j < cols_; ++j) {
+            result.set(i, j, get(i, j) * scalar);
+        }
+    }
+    return result;
+}
+
 Matrix Matrix::transpose() const{
     Matrix result(cols_, rows_);
 

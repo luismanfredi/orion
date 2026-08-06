@@ -27,6 +27,7 @@ class Matrix {
         Matrix operator+(const Matrix& other) const;
         Matrix operator-(const Matrix& other) const;
         Matrix operator*(const Matrix& other) const;
+        Matrix operator*(double Scalar) const;
         Matrix transpose() const;
         double determinant() const;
 

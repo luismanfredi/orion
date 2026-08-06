@@ -3,7 +3,8 @@
 #include <ostream>
 #include <vector>
 #include <iomanip>
-#include "exceptions.hpp"
+#include <initializer_list>
+#include "exceptions/MatrixExceptions.hpp"
 
 class Matrix {
     private:
@@ -15,6 +16,7 @@ class Matrix {
 
     public:
         Matrix(std::size_t r, std::size_t c, double initial_value = 0.0);
+        Matrix(std::initializer_list<std::initializer_list<double>> values);
 
         void set(std::size_t r, std::size_t c, double val);
         double get(std::size_t r, std::size_t c) const;

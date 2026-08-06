@@ -8,8 +8,28 @@ Matrix::Matrix(std::size_t r, std::size_t c, double initial_value)
       cols_(c),
       data_(r * c, initial_value) {}
 
+Matrix::Matrix(std::initializer_list<std::initializer_list<double>> values) {
+    rows_ = values.size();
+    if (rows == 0) {
+        cols_ = 0;
+        return;
+    }
+    cols_ = (*values.begin()).size();
+    for (const auto& row : values) {
+        if (row.size() != cols_) {
+            throw InvalidMatrixDimensions("Invalid Matrix dimensions!");
+        }
+    }
+    data_.reserve(rows_ * cols_);
+    for (const auto& row : values) {
+        for (const double value: row) {
+            data_.push_back(value);
+        }
+    }
+}
+
 std::size_t Matrix::index(std::size_t row, std::size_t col) const {
-    if(row >= rows_ || col >= cols_){
+    if(row >= rows_ || col >= cols_) {
         throw PositionNotInMatrix(
             "Position (" +
             std::to_string(row) + ", " +
@@ -22,27 +42,27 @@ std::size_t Matrix::index(std::size_t row, std::size_t col) const {
     return row * cols_ + col;
 }
 
-void Matrix::set(std::size_t r, std::size_t c, double val){
+void Matrix::set(std::size_t r, std::size_t c, double val) {
     data_[index(r, c)] = val;
 }
 
-double Matrix::get(std::size_t r, std::size_t c) const{
+double Matrix::get(std::size_t r, std::size_t c) const {
     return data_[index(r, c)];
 }
 
-std::size_t Matrix::rows() const{
+std::size_t Matrix::rows() const {
     return rows_;
 }
 
-std::size_t Matrix::cols() const{
+std::size_t Matrix::cols() const {
     return cols_;
 }
 
 std::ostream& operator<<(std::ostream& os, const Matrix& mat) { 
-    for(std::size_t i = 0; i < mat.rows_; i++){
+    for (std::size_t i = 0; i < mat.rows_; i++) {
         os << "|";
 
-        for(std::size_t j = 0; j < mat.cols_; j++){
+        for (std::size_t j = 0; j < mat.cols_; j++) {
             os << std::setw(8)<< mat.get(i, j);
         }
     os << " |\n";

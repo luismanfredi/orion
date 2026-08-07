@@ -56,6 +56,13 @@ void Matrix::fill(double value) {
     }
 }
 
+void Matrix::fillRange(double start, double step){
+   for (double& element : data_) {
+        element = start;
+        start += step;
+    }
+}
+
 std::size_t Matrix::rows() const {
     return rows_;
 }

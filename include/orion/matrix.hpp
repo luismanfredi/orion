@@ -22,6 +22,7 @@ class Matrix {
         double get(std::size_t r, std::size_t c) const;
 
         void fill(double value = 0.0);
+        void fillRange(double start, double step = 1.0);
 
         std::size_t rows() const;
         std::size_t cols() const;

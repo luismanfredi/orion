@@ -50,15 +50,10 @@ double Matrix::get(std::size_t r, std::size_t c) const {
     return data_[index(r, c)];
 }
 
-Matrix Matrix::fill(double value) {
-    Matrix result(rows_, cols_);
-
-    for (std::size_t i = 0; i < rows_; ++i) {
-        for (std::size_t j = 0; j < cols_; ++j) {
-            result.set(i, j, value);
-        }
+void Matrix::fill(double value) {
+    for (double& element : data_) {
+        element = value;
     }
-    return result;
 }
 
 std::size_t Matrix::rows() const {

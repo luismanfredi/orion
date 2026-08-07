@@ -21,7 +21,7 @@ class Matrix {
         void set(std::size_t r, std::size_t c, double val);
         double get(std::size_t r, std::size_t c) const;
 
-        Matrix fill(double value = 0.0);
+        void fill(double value = 0.0);
 
         std::size_t rows() const;
         std::size_t cols() const;

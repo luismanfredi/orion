@@ -2,13 +2,13 @@
 #include <iostream>
 
 int main() {
-    Matrix A{
+    Orion::Matrix A{
         {1, 2, 3},
         {4, 5, 6},
         {7, 8, 9}
     };
 
-    Matrix B(3, 3, 1.5);
+    Orion::Matrix B(3, 3, 1.5);
 
     std::cout << "Matrix A:\n";
     std::cout << A << "\n\n";

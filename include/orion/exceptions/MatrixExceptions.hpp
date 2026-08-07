@@ -4,7 +4,7 @@
 #include <exception>
 #include "BaseException.hpp"
 
-namespace Orion {
+namespace orion {
     class InvalidMatrixDimensions : public Exception {
         public:
             explicit InvalidMatrixDimensions(const std::string& msg)

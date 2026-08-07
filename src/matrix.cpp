@@ -4,7 +4,7 @@
 #include <iomanip>
 #include <string>
 
-namespace Orion {
+namespace orion {
     Matrix::Matrix(std::size_t r, std::size_t c, double initial_value) 
         : rows_(r), 
         cols_(c),
@@ -145,7 +145,7 @@ namespace Orion {
         }
 
         for (std::size_t i = 0; i < data_.size(); ++i) {
-            if (!Orion::nearlyEqual(data_[i], other.data_[i])) {
+            if (!orion::nearlyEqual(data_[i], other.data_[i])) {
                 return false;
             }
         }

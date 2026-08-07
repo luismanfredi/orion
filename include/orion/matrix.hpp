@@ -7,7 +7,7 @@
 
 #include "exceptions/MatrixExceptions.hpp"
 
-namespace Orion{
+namespace orion{
     class Matrix {
         private:
             std::size_t rows_;

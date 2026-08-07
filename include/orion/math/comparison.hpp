@@ -5,7 +5,7 @@
 
 #include "constants.hpp"
 
-namespace Orion {
+namespace orion {
 
 inline bool nearlyEqual(
     double a,

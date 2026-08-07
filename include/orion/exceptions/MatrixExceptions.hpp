@@ -17,27 +17,3 @@ namespace Orion {
             : Exception("Matrix Error: " + msg) {}
     };
 }
-
-class InvalidMatrixDimensions : public std::exception {
-    private:
-        std::string message;
-
-    public:
-        explicit InvalidMatrixDimensions(const std::string& msg) : message(msg) {}
-
-        const char* what() const noexcept override {
-            return message.c_str();
-        }
-};
-
-class PositionNotInMatrix : public std::exception {
-    private:
-        std::string message;
-
-    public:
-        explicit PositionNotInMatrix(const std::string& msg) : message(msg) {}
-
-        const char* what() const noexcept override {
-            return message.c_str();
-        }
-};

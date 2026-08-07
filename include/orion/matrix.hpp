@@ -34,7 +34,6 @@ namespace Orion{
             Matrix operator*(double scalar) const;
 
             Matrix transpose() const;
-            double determinant() const;
 
             friend std::ostream& operator<<(std::ostream&, const Matrix&);
     };

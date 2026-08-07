@@ -4,6 +4,7 @@
 #include <vector>
 #include <iomanip>
 #include <initializer_list>
+
 #include "exceptions/MatrixExceptions.hpp"
 
 namespace Orion{
@@ -32,6 +33,8 @@ namespace Orion{
             Matrix operator-(const Matrix& other) const;
             Matrix operator*(const Matrix& other) const;
             Matrix operator*(double scalar) const;
+
+            bool operator==(const Matrix& other) const;
 
             Matrix transpose() const;
 

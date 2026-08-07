@@ -1,4 +1,5 @@
 #include "orion/matrix.hpp"
+#include "orion/math/comparison.hpp"
 
 #include <iomanip>
 #include <string>
@@ -134,8 +135,21 @@ namespace Orion {
         return result;
     }
 
-    Matrix operator*(double scalar, const Matrix& matrix){
+    Matrix operator*(double scalar, const Matrix& matrix) {
         return matrix * scalar;
+    }
+
+    bool Matrix::operator==(const Matrix& other) const{
+        if (rows_ != other.rows_ || cols_ != other.cols_) {
+        return false;
+        }
+
+        for (std::size_t i = 0; i < data_.size(); ++i) {
+            if (!Orion::nearlyEqual(data_[i], other.data_[i])) {
+                return false;
+            }
+        }
+        return true;
     }
 
     Matrix Matrix::transpose() const{

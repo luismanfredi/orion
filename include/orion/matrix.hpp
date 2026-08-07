@@ -21,6 +21,8 @@ class Matrix {
         void set(std::size_t r, std::size_t c, double val);
         double get(std::size_t r, std::size_t c) const;
 
+        Matrix fill(double value = 0.0);
+
         std::size_t rows() const;
         std::size_t cols() const;
 
@@ -28,6 +30,7 @@ class Matrix {
         Matrix operator-(const Matrix& other) const;
         Matrix operator*(const Matrix& other) const;
         Matrix operator*(double Scalar) const;
+
         Matrix transpose() const;
         double determinant() const;
 

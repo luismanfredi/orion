@@ -38,10 +38,6 @@ std::size_t Matrix::index(std::size_t row, std::size_t col) const {
   return row * cols_ + col;
 }
 
-void Matrix::set(std::size_t r, std::size_t c, double val) { data_[index(r, c)] = val; }
-
-double Matrix::get(std::size_t r, std::size_t c) const { return data_[index(r, c)]; }
-
 void Matrix::fill(double value) {
   for (double& element : data_) {
     element = value;
@@ -68,7 +64,7 @@ Matrix Matrix::operator+(const Matrix& other) const {
 
   for (std::size_t i = 0; i < rows_; ++i) {
     for (std::size_t j = 0; j < cols_; ++j) {
-      result.set(i, j, get(i, j) + other.get(i, j));
+      result(i, j) = (*this)(i, j) + other(i, j);
     }
   }
   return result;
@@ -83,7 +79,7 @@ Matrix Matrix::operator-(const Matrix& other) const {
 
   for (std::size_t i = 0; i < rows_; ++i) {
     for (std::size_t j = 0; j < cols_; ++j) {
-      result.set(i, j, get(i, j) - other.get(i, j));
+      result(i, j) = (*this)(i, j) - other(i, j);
     }
   }
   return result;
@@ -102,9 +98,9 @@ Matrix Matrix::operator*(const Matrix& other) const {
     for (std::size_t j = 0; j < other.cols_; j++) {
       double sum = 0;
       for (std::size_t k = 0; k < cols_; k++) {
-        sum += get(i, k) * other.get(k, j);
+        sum += (*this)(i, k) * other(k, j);
       }
-      result.set(i, j, sum);
+      result(i, j) = sum;
     }
   }
   return result;
@@ -115,13 +111,17 @@ Matrix Matrix::operator*(double scalar) const {
 
   for (std::size_t i = 0; i < rows_; ++i) {
     for (std::size_t j = 0; j < cols_; ++j) {
-      result.set(i, j, get(i, j) * scalar);
+      result(i, j) = (*this)(i, j) * scalar;
     }
   }
   return result;
 }
 
 Matrix operator*(double scalar, const Matrix& matrix) { return matrix * scalar; }
+
+double& Matrix::operator()(std::size_t r, std::size_t c) { return data_[index(r, c)]; }
+
+double Matrix::operator()(std::size_t r, std::size_t c) const { return data_[index(r, c)]; }
 
 bool Matrix::operator==(const Matrix& other) const {
   if (rows_ != other.rows_ || cols_ != other.cols_) {
@@ -141,7 +141,7 @@ Matrix Matrix::transpose() const {
 
   for (std::size_t i = 0; i < rows_; ++i) {
     for (std::size_t j = 0; j < cols_; ++j) {
-      result.set(j, i, get(i, j));
+      result(j, i) = (*this)(i, j);
     }
   }
   return result;
@@ -152,7 +152,7 @@ std::ostream& operator<<(std::ostream& os, const Matrix& mat) {
     os << "|";
 
     for (std::size_t j = 0; j < mat.cols_; ++j) {
-      os << std::setw(8) << mat.get(i, j);
+      os << std::setw(8) << mat(i, j);
     }
     os << " |\n";
   }

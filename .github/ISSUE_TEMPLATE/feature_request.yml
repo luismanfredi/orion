@@ -1,0 +1,67 @@
+name: Feature Request
+description: Suggest an idea or enhancement for Orion.
+title: "[FEATURE]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to suggest an idea!
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / Motivation
+      description: What problem are you trying to solve? Why is this needed?
+      placeholder: "e.g., There's currently no way to build an identity matrix without manually setting every element..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe what you'd like to happen. Include a rough API sketch if you have one in mind.
+      placeholder: "e.g., A static factory method orion::Matrix::Identity(n) that returns an n x n identity matrix..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Any alternative solutions or workarounds you've thought about.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      description: Which part of the project does this affect?
+      options:
+        - Matrix core
+        - Build / CMake
+        - CI
+        - Documentation
+        - Other (specify in description)
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Anything else that would help understand the request (references, related issues, etc.).
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Checklist
+      options:
+        - label: I have read the [Code of Conduct](../../CODE_OF_CONDUCT.md).
+          required: true
+        - label: I have searched existing issues to ensure this is not a duplicate.
+          required: true

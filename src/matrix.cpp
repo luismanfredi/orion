@@ -123,6 +123,10 @@ Matrix Matrix::operator*(double scalar) const {
 
 Matrix operator*(double scalar, const Matrix& matrix) { return matrix * scalar; }
 
+double& Matrix::operator()(std::size_t r, std::size_t c) { return data_[index(r, c)]; }
+
+double Matrix::operator()(std::size_t r, std::size_t c) const { return data_[index(r, c)]; }
+
 bool Matrix::operator==(const Matrix& other) const {
   if (rows_ != other.rows_ || cols_ != other.cols_) {
     return false;

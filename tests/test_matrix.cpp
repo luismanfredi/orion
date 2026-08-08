@@ -26,6 +26,21 @@ TEST_CASE("Matrix initialization and basic properties", "[matrix][constructors]"
   }
 }
 
+TEST_CASE("Matrix element access", "[matrix][access]") {
+  orion::Matrix A{{1, 2}, {3, 4}};
+
+  SECTION("Verify access and get operator '()'") {
+    REQUIRE(A(0, 0) == 1);
+    REQUIRE(A(0, 1) == 2);
+    REQUIRE(A(1, 0) == 3);
+    REQUIRE(A(1, 1) == 4);
+  }
+
+  SECTION("Operator '()' must throw exception") {
+    REQUIRE_THROWS_AS(A(3, 3), orion::PositionNotInMatrix);
+  }
+}
+
 TEST_CASE("Matrix fills methods", "[matrix][fill]") {
   orion::Matrix A{{1, 2}, {3, 4}};
   orion::Matrix B{{5, 6}, {7, 8}};

@@ -1,0 +1,66 @@
+name: Bug Report
+description: Create a report to help us improve Orion.
+title: "[BUG]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to report this bug! Please provide as much context as possible to help me reproduce and fix the issue.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: "e.g., When calculating the determinant of a 3x3 matrix, the result is incorrect if the matrix contains negative numbers..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Minimum Reproducible Example
+      description: Please provide a minimal C++ code snippet that reproduces the issue.
+      render: cpp
+    validations:
+      required: true
+
+  - type: input
+    id: compiler
+    attributes:
+      label: Compiler & Version
+      description: What compiler are you using? (e.g., GCC 12, Clang 15, MSVC 19.30)
+      placeholder: "GCC 13.2"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      description: On which OS did you experience this bug?
+      options:
+        - Linux
+        - Windows
+        - macOS
+        - Other (specify in description)
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Logs or Error Messages
+      description: Paste any compiler outputs, CMake errors, or stack traces here.
+      render: shell
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Checklist
+      options:
+        - label: I have read the [Code of Conduct](../../CODE_OF_CONDUCT.md).
+          required: true
+        - label: I have read the [Contributing Guidelines](../../CONTRIBUTING.md) and searched existing issues to ensure this is not a duplicate.
+          required: true

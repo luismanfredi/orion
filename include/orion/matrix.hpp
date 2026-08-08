@@ -34,6 +34,8 @@ class Matrix {
   Matrix operator*(const Matrix& other) const;
   Matrix operator*(double scalar) const;
 
+  double& operator()(std::size_t r, std::size_t c);
+  double operator()(std::size_t r, std::size_t c) const;
   bool operator==(const Matrix& other) const;
 
   Matrix transpose() const;

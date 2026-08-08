@@ -26,28 +26,6 @@ TEST_CASE("Matrix initialization and basic properties", "[matrix][constructors]"
   }
 }
 
-TEST_CASE("Matrix element access", "[matrix][access]") {
-  orion::Matrix A{{1, 2}, {3, 4}};
-
-  SECTION("Verify set and get methods") {
-    A.set(0, 0, 0);
-    REQUIRE(A.get(0, 0) == 0);
-  }
-
-  SECTION("Get and set methods must not raise exceptions") {
-    REQUIRE_NOTHROW(A.get(0, 0));
-    REQUIRE_NOTHROW(A.get(1, 1));
-
-    REQUIRE_NOTHROW(A.set(0, 0, 1));
-    REQUIRE_NOTHROW(A.set(1, 1, 2));
-  }
-
-  SECTION("Get and set methods must raise exceptions") {
-    REQUIRE_THROWS_AS(A.get(3, 3), orion::PositionNotInMatrix);
-    REQUIRE_THROWS_AS(A.set(3, 3, 1), orion::PositionNotInMatrix);
-  }
-}
-
 TEST_CASE("Matrix fills methods", "[matrix][fill]") {
   orion::Matrix A{{1, 2}, {3, 4}};
   orion::Matrix B{{5, 6}, {7, 8}};

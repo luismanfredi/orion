@@ -71,7 +71,7 @@ Matrix Matrix::operator-(const Matrix& other) const {
   Matrix result(rows_, cols_);
 
   for (std::size_t i = 0; i < data_.size(); ++i) {
-    result.data_[i] = data_[i] - other.data_[1];
+    result.data_[i] = data_[i] - other.data_[i];
   }
   return result;
 }

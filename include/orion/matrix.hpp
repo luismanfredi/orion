@@ -35,6 +35,8 @@ class Matrix {
   double operator()(std::size_t r, std::size_t c) const;
   bool operator==(const Matrix& other) const;
 
+  static Matrix zeros(std::size_t r, std::size_t c);
+
   Matrix transpose() const;
 
   friend std::ostream& operator<<(std::ostream&, const Matrix&);

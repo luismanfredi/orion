@@ -37,6 +37,7 @@ class Matrix {
 
   static Matrix zeros(std::size_t r, std::size_t c);
   static Matrix ones(std::size_t r, std::size_t c);
+  static Matrix identity(std::size_t size);
 
   Matrix transpose() const;
 

@@ -56,6 +56,18 @@ void Matrix::fillRandom(double min_val, double max_val) {
   }
 }
 
+void Matrix::setIdentity() {
+  if (rows_ != cols_) {
+    throw InvalidMatrixDimensions("Identity Matrices MUST be square (e.g 2x2; 3x3; ...).");
+  }
+
+  this->fill(0.0);
+
+  for (std::size_t i = 0; i < rows_; ++i) {
+    (*this)(i, i) = 1.0;
+  }
+}
+
 std::size_t Matrix::rows() const { return rows_; }
 
 std::size_t Matrix::cols() const { return cols_; }

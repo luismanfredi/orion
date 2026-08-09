@@ -83,15 +83,14 @@ Matrix Matrix::operator*(const Matrix& other) const {
         "Matrix");
   }
 
-  Matrix result(rows_, other.cols_);
+  Matrix result(rows_, other.cols_, 0.0);
 
-  for (std::size_t i = 0; i < rows_; i++) {
-    for (std::size_t j = 0; j < other.cols_; j++) {
-      double sum = 0;
-      for (std::size_t k = 0; k < cols_; k++) {
-        sum += (*this)(i, k) * other(k, j);
+  for (std::size_t i = 0; i < rows_; ++i) {
+    for (std::size_t k = 0; k < cols_; ++k) {
+      double r_ik = data_[i * cols_ + k];
+      for (std::size_t j = 0; j < other.cols_; ++j) {
+        result.data_[i * other.cols_ + j] += r_ik * other.data_[k * other.cols_ + j];
       }
-      result(i, j) = sum;
     }
   }
   return result;

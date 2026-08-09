@@ -111,4 +111,11 @@ TEST_CASE("Matrix factory functions", "[matrix][factory]") {
 
     REQUIRE(A == B);
   }
+
+  SECTION("Verify identity() fuction") {
+    orion::Matrix A = orion::Matrix::identity(2);
+    orion::Matrix B{{1.0, 0.0}, {0.0, 1.0}};
+
+    REQUIRE(A == B);
+  }
 }

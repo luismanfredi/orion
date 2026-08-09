@@ -22,7 +22,7 @@ class Matrix {
 
   void fill(double value = 0.0);
   void fillRange(double start, double step = 1.0);
-  void fillRandom(double min_val, double max_val);
+  void fillRandom(double min_val = 0.0, double max_val = 1.0);
   void setIdentity();
   void setZeros();
   void setOnes();
@@ -42,7 +42,7 @@ class Matrix {
   static Matrix zeros(std::size_t r, std::size_t c);
   static Matrix ones(std::size_t r, std::size_t c);
   static Matrix identity(std::size_t size);
-  static Matrix random(std::size_t r, std::size_t c, double min_val = 0.0, double max_value = 0.0);
+  static Matrix random(std::size_t r, std::size_t c, double min_val = 0.0, double max_value = 1.0);
 
   Matrix transpose() const;
 

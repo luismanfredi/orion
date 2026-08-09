@@ -23,9 +23,7 @@ Matrix::Matrix(std::initializer_list<std::initializer_list<double>> values) {
   }
   data_.reserve(rows_ * cols_);
   for (const auto& row : values) {
-    for (const double value : row) {
-      data_.push_back(value);
-    }
+    data_.insert(data_.end(), row.begin(), row.end());
   }
 }
 

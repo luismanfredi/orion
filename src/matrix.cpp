@@ -1,5 +1,6 @@
 #include "orion/matrix.hpp"
 
+#include <algorithm>
 #include <iomanip>
 #include <string>
 
@@ -23,9 +24,7 @@ Matrix::Matrix(std::initializer_list<std::initializer_list<double>> values) {
   }
   data_.reserve(rows_ * cols_);
   for (const auto& row : values) {
-    for (const double value : row) {
-      data_.push_back(value);
-    }
+    data_.insert(data_.end(), row.begin(), row.end());
   }
 }
 
@@ -38,11 +37,7 @@ std::size_t Matrix::index(std::size_t row, std::size_t col) const {
   return row * cols_ + col;
 }
 
-void Matrix::fill(double value) {
-  for (double& element : data_) {
-    element = value;
-  }
-}
+void Matrix::fill(double value) { std::fill(data_.begin(), data_.end(), value); }
 
 void Matrix::fillRange(double start, double step) {
   for (double& element : data_) {
@@ -62,10 +57,8 @@ Matrix Matrix::operator+(const Matrix& other) const {
 
   Matrix result(rows_, cols_);
 
-  for (std::size_t i = 0; i < rows_; ++i) {
-    for (std::size_t j = 0; j < cols_; ++j) {
-      result(i, j) = (*this)(i, j) + other(i, j);
-    }
+  for (std::size_t i = 0; i < data_.size(); ++i) {
+    result.data_[i] = data_[i] + other.data_[i];
   }
   return result;
 }
@@ -77,10 +70,8 @@ Matrix Matrix::operator-(const Matrix& other) const {
 
   Matrix result(rows_, cols_);
 
-  for (std::size_t i = 0; i < rows_; ++i) {
-    for (std::size_t j = 0; j < cols_; ++j) {
-      result(i, j) = (*this)(i, j) - other(i, j);
-    }
+  for (std::size_t i = 0; i < data_.size(); ++i) {
+    result.data_[i] = data_[i] - other.data_[i];
   }
   return result;
 }
@@ -92,15 +83,14 @@ Matrix Matrix::operator*(const Matrix& other) const {
         "Matrix");
   }
 
-  Matrix result(rows_, other.cols_);
+  Matrix result(rows_, other.cols_, 0.0);
 
-  for (std::size_t i = 0; i < rows_; i++) {
-    for (std::size_t j = 0; j < other.cols_; j++) {
-      double sum = 0;
-      for (std::size_t k = 0; k < cols_; k++) {
-        sum += (*this)(i, k) * other(k, j);
+  for (std::size_t i = 0; i < rows_; ++i) {
+    for (std::size_t k = 0; k < cols_; ++k) {
+      double r_ik = data_[i * cols_ + k];
+      for (std::size_t j = 0; j < other.cols_; ++j) {
+        result.data_[i * other.cols_ + j] += r_ik * other.data_[k * other.cols_ + j];
       }
-      result(i, j) = sum;
     }
   }
   return result;
@@ -109,10 +99,8 @@ Matrix Matrix::operator*(const Matrix& other) const {
 Matrix Matrix::operator*(double scalar) const {
   Matrix result(rows_, cols_);
 
-  for (std::size_t i = 0; i < rows_; ++i) {
-    for (std::size_t j = 0; j < cols_; ++j) {
-      result(i, j) = (*this)(i, j) * scalar;
-    }
+  for (std::size_t i = 0; i < data_.size(); ++i) {
+    result.data_[i] = data_[i] * scalar;
   }
   return result;
 }
@@ -141,7 +129,7 @@ Matrix Matrix::transpose() const {
 
   for (std::size_t i = 0; i < rows_; ++i) {
     for (std::size_t j = 0; j < cols_; ++j) {
-      result(j, i) = (*this)(i, j);
+      result.data_[j * rows_ + i] = data_[i * cols_ + j];
     }
   }
   return result;

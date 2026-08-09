@@ -68,6 +68,10 @@ void Matrix::setIdentity() {
   }
 }
 
+void Matrix::setZeros() { this->fill(0.0); }
+
+void Matrix::setOnes() { this->fill(1.0); }
+
 std::size_t Matrix::rows() const { return rows_; }
 
 std::size_t Matrix::cols() const { return cols_; }

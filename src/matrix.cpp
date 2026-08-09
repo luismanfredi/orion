@@ -129,7 +129,7 @@ Matrix Matrix::transpose() const {
 
   for (std::size_t i = 0; i < rows_; ++i) {
     for (std::size_t j = 0; j < cols_; ++j) {
-      result(j, i) = (*this)(i, j);
+      result.data_[j * rows_ + i] = data_[i * cols_ + j];
     }
   }
   return result;

@@ -57,10 +57,8 @@ Matrix Matrix::operator+(const Matrix& other) const {
 
   Matrix result(rows_, cols_);
 
-  for (std::size_t i = 0; i < rows_; ++i) {
-    for (std::size_t j = 0; j < cols_; ++j) {
-      result(i, j) = (*this)(i, j) + other(i, j);
-    }
+  for (std::size_t i = 0; i < data_.size(); ++i) {
+    result.data_[i] = data_[i] + other.data_[1];
   }
   return result;
 }
@@ -72,10 +70,8 @@ Matrix Matrix::operator-(const Matrix& other) const {
 
   Matrix result(rows_, cols_);
 
-  for (std::size_t i = 0; i < rows_; ++i) {
-    for (std::size_t j = 0; j < cols_; ++j) {
-      result(i, j) = (*this)(i, j) - other(i, j);
-    }
+  for (std::size_t i = 0; i < data_.size(); ++i) {
+    result.data_[i] = data_[i] - other.data_[1];
   }
   return result;
 }
@@ -104,10 +100,8 @@ Matrix Matrix::operator*(const Matrix& other) const {
 Matrix Matrix::operator*(double scalar) const {
   Matrix result(rows_, cols_);
 
-  for (std::size_t i = 0; i < rows_; ++i) {
-    for (std::size_t j = 0; j < cols_; ++j) {
-      result(i, j) = (*this)(i, j) * scalar;
-    }
+  for (std::size_t i = 0; i < data_.size(); ++i) {
+    result.data_[i] = data_[i] * scalar;
   }
   return result;
 }

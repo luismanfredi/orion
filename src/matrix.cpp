@@ -128,6 +128,16 @@ Matrix Matrix::zeros(std::size_t r, std::size_t c) { return Matrix(r, c); }
 
 Matrix Matrix::ones(std::size_t r, std::size_t c) { return Matrix(r, c, 1.0); }
 
+Matrix Matrix::identity(std::size_t size) {
+  Matrix result(size, size);
+
+  for (std::size_t i = 0; i < size; ++i) {
+    result(i, i) = 1.0;
+  }
+
+  return result;
+}
+
 Matrix Matrix::transpose() const {
   Matrix result(cols_, rows_);
 

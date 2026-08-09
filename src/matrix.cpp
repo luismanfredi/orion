@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <iomanip>
+#include <random>
 #include <string>
 
 #include "orion/math/comparison.hpp"
@@ -43,6 +44,15 @@ void Matrix::fillRange(double start, double step) {
   for (double& element : data_) {
     element = start;
     start += step;
+  }
+}
+
+void Matrix::fillRandom(double min_val, double max_val) {
+  static thread_local std::mt19937 gen(std::random_device{}());
+  std::uniform_real_distribution<double> dist(min_val, max_val);
+
+  for (auto& element : data_) {
+    element = dist(gen);
   }
 }
 
@@ -135,6 +145,12 @@ Matrix Matrix::identity(std::size_t size) {
     result(i, i) = 1.0;
   }
 
+  return result;
+}
+
+Matrix Matrix::random(std::size_t r, std::size_t c, double min_val, double max_value) {
+  Matrix result(r, c);
+  result.fillRandom(min_val, max_value);
   return result;
 }
 

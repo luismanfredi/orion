@@ -87,6 +87,22 @@ TEST_CASE("Matrix arithmetic operations", "[matrix][math]") {
   }
 }
 
+TEST_CASE("Test Random methods", "[matrix][random]") {
+  SECTION("Verify fillRandom() method") {
+    orion::Matrix A{{1, 2}, {3, 4}};
+    orion::Matrix B{{1, 2}, {3, 4}};
+
+    A.fillRandom();
+    REQUIRE(A != B);
+  }
+
+  SECTION("Verify random() factory function") {
+    orion::Matrix B{{1, 2}, {3, 4}};
+
+    REQUIRE(orion::Matrix::random(2, 2) != B);
+  }
+}
+
 TEST_CASE("Other Matrix methods", "[matrix][other]") {
   orion::Matrix A{{1, 2}, {3, 4}};
 

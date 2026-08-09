@@ -126,6 +126,8 @@ bool Matrix::operator==(const Matrix& other) const {
 
 Matrix Matrix::zeros(std::size_t r, std::size_t c) { return Matrix(r, c); }
 
+Matrix Matrix::ones(std::size_t r, std::size_t c) { return Matrix(r, c, 1.0); }
+
 Matrix Matrix::transpose() const {
   Matrix result(cols_, rows_);
 

@@ -24,6 +24,8 @@ class Matrix {
   void fillRange(double start, double step = 1.0);
   void fillRandom(double min_val, double max_val);
   void setIdentity();
+  void setZeros();
+  void setOnes();
 
   std::size_t rows() const;
   std::size_t cols() const;

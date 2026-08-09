@@ -150,6 +150,19 @@ bool Matrix::operator==(const Matrix& other) const {
   return true;
 }
 
+bool Matrix::operator!=(const Matrix& other) const {
+  if (rows_ != other.rows_ || cols_ != other.cols_) {
+    return true;
+  }
+
+  for (std::size_t i = 0; i < data_.size(); ++i) {
+    if (!orion::nearlyEqual(data_[i], other.data_[i])) {
+      return true;
+    }
+  }
+  return false;
+}
+
 Matrix Matrix::zeros(std::size_t r, std::size_t c) { return Matrix(r, c); }
 
 Matrix Matrix::ones(std::size_t r, std::size_t c) { return Matrix(r, c, 1.0); }

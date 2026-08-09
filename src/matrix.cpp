@@ -1,5 +1,6 @@
 #include "orion/matrix.hpp"
 
+#include <algorithm>
 #include <iomanip>
 #include <string>
 
@@ -36,11 +37,7 @@ std::size_t Matrix::index(std::size_t row, std::size_t col) const {
   return row * cols_ + col;
 }
 
-void Matrix::fill(double value) {
-  for (double& element : data_) {
-    element = value;
-  }
-}
+void Matrix::fill(double value) { std::fill(data_.begin(), data_.end(), value); }
 
 void Matrix::fillRange(double start, double step) {
   for (double& element : data_) {

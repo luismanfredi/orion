@@ -100,7 +100,14 @@ TEST_CASE("Other Matrix methods", "[matrix][other]") {
 TEST_CASE("Matrix factory functions", "[matrix][factory]") {
   SECTION("Verify zeros() fuction") {
     orion::Matrix A = orion::Matrix::zeros(2, 2);
-    orion::Matrix B{{0, 0}, {0, 0}};
+    orion::Matrix B{{0.0, 0.0}, {0.0, 0.0}};
+
+    REQUIRE(A == B);
+  }
+
+  SECTION("Verify ones() fuction") {
+    orion::Matrix A = orion::Matrix::ones(2, 2);
+    orion::Matrix B{{1.0, 1.0}, {1.0, 1.0}};
 
     REQUIRE(A == B);
   }

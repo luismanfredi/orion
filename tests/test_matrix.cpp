@@ -95,6 +95,13 @@ TEST_CASE("Other Matrix methods", "[matrix][other]") {
 
     REQUIRE(A.transpose() == B);
   }
+
+  SECTION("Verify setIdentity method") {
+    orion::Matrix B{{1.0, 0.0}, {0.0, 1.0}};
+
+    A.setIdentity();
+    REQUIRE(A == B);
+  }
 }
 
 TEST_CASE("Matrix factory functions", "[matrix][factory]") {

@@ -36,6 +36,7 @@ class Matrix {
   bool operator==(const Matrix& other) const;
 
   static Matrix zeros(std::size_t r, std::size_t c);
+  static Matrix ones(std::size_t r, std::size_t c);
 
   Matrix transpose() const;
 

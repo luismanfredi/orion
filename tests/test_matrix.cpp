@@ -96,3 +96,12 @@ TEST_CASE("Other Matrix methods", "[matrix][other]") {
     REQUIRE(A.transpose() == B);
   }
 }
+
+TEST_CASE("Matrix factory functions", "[matrix][factory]") {
+  SECTION("Verify zeros() fuction") {
+    orion::Matrix A = orion::Matrix::zeros(2, 2);
+    orion::Matrix B{{0, 0}, {0, 0}};
+
+    REQUIRE(A == B);
+  }
+}

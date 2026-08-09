@@ -22,6 +22,10 @@ class Matrix {
 
   void fill(double value = 0.0);
   void fillRange(double start, double step = 1.0);
+  void fillRandom(double min_val = 0.0, double max_val = 1.0);
+  void setIdentity();
+  void setZeros();
+  void setOnes();
 
   std::size_t rows() const;
   std::size_t cols() const;
@@ -34,6 +38,12 @@ class Matrix {
   double& operator()(std::size_t r, std::size_t c);
   double operator()(std::size_t r, std::size_t c) const;
   bool operator==(const Matrix& other) const;
+  bool operator!=(const Matrix& other) const;
+
+  static Matrix zeros(std::size_t r, std::size_t c);
+  static Matrix ones(std::size_t r, std::size_t c);
+  static Matrix identity(std::size_t size);
+  static Matrix random(std::size_t r, std::size_t c, double min_val = 0.0, double max_value = 1.0);
 
   Matrix transpose() const;
 

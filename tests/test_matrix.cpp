@@ -87,12 +87,72 @@ TEST_CASE("Matrix arithmetic operations", "[matrix][math]") {
   }
 }
 
+TEST_CASE("Test Random methods", "[matrix][random]") {
+  SECTION("Verify fillRandom() method") {
+    orion::Matrix A{{1, 2}, {3, 4}};
+    orion::Matrix B{{1, 2}, {3, 4}};
+
+    A.fillRandom();
+    REQUIRE(A != B);
+  }
+
+  SECTION("Verify random() factory function") {
+    orion::Matrix B{{1, 2}, {3, 4}};
+
+    REQUIRE(orion::Matrix::random(2, 2) != B);
+  }
+}
+
 TEST_CASE("Other Matrix methods", "[matrix][other]") {
   orion::Matrix A{{1, 2}, {3, 4}};
 
-  SECTION("Verify transpose method") {
+  SECTION("Verify transpose() method") {
     orion::Matrix B{{1, 3}, {2, 4}};
 
     REQUIRE(A.transpose() == B);
+  }
+
+  SECTION("Verify setIdentity() method") {
+    orion::Matrix B{{1.0, 0.0}, {0.0, 1.0}};
+
+    A.setIdentity();
+    REQUIRE(A == B);
+  }
+
+  SECTION("Verify setZeros() method") {
+    orion::Matrix B(2, 2);
+
+    A.setZeros();
+    REQUIRE(A == B);
+  }
+
+  SECTION("Verify setOnes() method") {
+    orion::Matrix B(2, 2, 1.0);
+
+    A.setOnes();
+    REQUIRE(A == B);
+  }
+}
+
+TEST_CASE("Matrix factory functions", "[matrix][factory]") {
+  SECTION("Verify zeros() fuction") {
+    orion::Matrix A = orion::Matrix::zeros(2, 2);
+    orion::Matrix B{{0.0, 0.0}, {0.0, 0.0}};
+
+    REQUIRE(A == B);
+  }
+
+  SECTION("Verify ones() fuction") {
+    orion::Matrix A = orion::Matrix::ones(2, 2);
+    orion::Matrix B{{1.0, 1.0}, {1.0, 1.0}};
+
+    REQUIRE(A == B);
+  }
+
+  SECTION("Verify identity() fuction") {
+    orion::Matrix A = orion::Matrix::identity(2);
+    orion::Matrix B{{1.0, 0.0}, {0.0, 1.0}};
+
+    REQUIRE(A == B);
   }
 }

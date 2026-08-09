@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <iomanip>
+#include <random>
 #include <string>
 
 #include "orion/math/comparison.hpp"
@@ -45,6 +46,31 @@ void Matrix::fillRange(double start, double step) {
     start += step;
   }
 }
+
+void Matrix::fillRandom(double min_val, double max_val) {
+  static thread_local std::mt19937 gen(std::random_device{}());
+  std::uniform_real_distribution<double> dist(min_val, max_val);
+
+  for (auto& element : data_) {
+    element = dist(gen);
+  }
+}
+
+void Matrix::setIdentity() {
+  if (rows_ != cols_) {
+    throw InvalidMatrixDimensions("Identity Matrices MUST be square (e.g 2x2; 3x3; ...).");
+  }
+
+  this->fill(0.0);
+
+  for (std::size_t i = 0; i < rows_; ++i) {
+    (*this)(i, i) = 1.0;
+  }
+}
+
+void Matrix::setZeros() { this->fill(0.0); }
+
+void Matrix::setOnes() { this->fill(1.0); }
 
 std::size_t Matrix::rows() const { return rows_; }
 
@@ -122,6 +148,39 @@ bool Matrix::operator==(const Matrix& other) const {
     }
   }
   return true;
+}
+
+bool Matrix::operator!=(const Matrix& other) const {
+  if (rows_ != other.rows_ || cols_ != other.cols_) {
+    return true;
+  }
+
+  for (std::size_t i = 0; i < data_.size(); ++i) {
+    if (!orion::nearlyEqual(data_[i], other.data_[i])) {
+      return true;
+    }
+  }
+  return false;
+}
+
+Matrix Matrix::zeros(std::size_t r, std::size_t c) { return Matrix(r, c); }
+
+Matrix Matrix::ones(std::size_t r, std::size_t c) { return Matrix(r, c, 1.0); }
+
+Matrix Matrix::identity(std::size_t size) {
+  Matrix result(size, size);
+
+  for (std::size_t i = 0; i < size; ++i) {
+    result(i, i) = 1.0;
+  }
+
+  return result;
+}
+
+Matrix Matrix::random(std::size_t r, std::size_t c, double min_val, double max_value) {
+  Matrix result(r, c);
+  result.fillRandom(min_val, max_value);
+  return result;
 }
 
 Matrix Matrix::transpose() const {

@@ -8,8 +8,8 @@
 #include "orion/math/comparison.hpp"
 
 namespace orion {
-Matrix::Matrix(std::size_t r, std::size_t c, double initial_value)
-    : rows_(r), cols_(c), data_(r * c, initial_value) {}
+Matrix::Matrix(std::size_t rows, std::size_t cols, double initial_value)
+    : rows_(rows), cols_(cols), data_(rows * cols, initial_value) {}
 
 Matrix::Matrix(std::initializer_list<std::initializer_list<double>> values) {
   rows_ = values.size();
@@ -133,9 +133,11 @@ Matrix Matrix::operator*(double scalar) const {
 
 Matrix operator*(double scalar, const Matrix& matrix) { return matrix * scalar; }
 
-double& Matrix::operator()(std::size_t r, std::size_t c) { return data_[index(r, c)]; }
+double& Matrix::operator()(std::size_t rows, std::size_t cols) { return data_[index(rows, cols)]; }
 
-double Matrix::operator()(std::size_t r, std::size_t c) const { return data_[index(r, c)]; }
+double Matrix::operator()(std::size_t rows, std::size_t cols) const {
+  return data_[index(rows, cols)];
+}
 
 bool Matrix::operator==(const Matrix& other) const {
   if (rows_ != other.rows_ || cols_ != other.cols_) {
@@ -163,9 +165,9 @@ bool Matrix::operator!=(const Matrix& other) const {
   return false;
 }
 
-Matrix Matrix::zeros(std::size_t r, std::size_t c) { return Matrix(r, c); }
+Matrix Matrix::zeros(std::size_t rows, std::size_t cols) { return Matrix(rows, cols); }
 
-Matrix Matrix::ones(std::size_t r, std::size_t c) { return Matrix(r, c, 1.0); }
+Matrix Matrix::ones(std::size_t rows, std::size_t cols) { return Matrix(rows, cols, 1.0); }
 
 Matrix Matrix::identity(std::size_t size) {
   Matrix result(size, size);
@@ -177,8 +179,8 @@ Matrix Matrix::identity(std::size_t size) {
   return result;
 }
 
-Matrix Matrix::random(std::size_t r, std::size_t c, double min_val, double max_value) {
-  Matrix result(r, c);
+Matrix Matrix::random(std::size_t rows, std::size_t cols, double min_val, double max_value) {
+  Matrix result(rows, cols);
   result.fillRandom(min_val, max_value);
   return result;
 }

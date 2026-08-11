@@ -64,11 +64,11 @@ class Matrix {
    *
    * All elements are initialized with zero by default.
    *
-   * @param r Number of rows of the matrix.
-   * @param c Number of columns of the matrix.
+   * @param rows Number of rows of the matrix.
+   * @param cols Number of columns of the matrix.
    * @param initial_value Initial value to fill the matrix. Default value of 0.0.
    */
-  Matrix(std::size_t r, std::size_t c, double initial_value = 0.0);
+  Matrix(std::size_t rows, std::size_t cols, double initial_value = 0.0);
 
   /**
    * @brief Creates a matrix with the given nested initializer lists.
@@ -186,23 +186,24 @@ class Matrix {
    *
    * This operator CAN modify a value. (e. g. A(1, 2) = 4.0).
    *
-   * @param r The row you want to access.
+   * @param rows The row you want to access.
+   * @param cols The column you want to access.
    *
    * @returns Element in the chosen position
    */
-  double& operator()(std::size_t r, std::size_t c);
+  double& operator()(std::size_t rows, std::size_t cols);
 
   /**
    * @brief Provides access to a matrix element using Matrix(row, column).
    *
    * This operator CANNOT modify a value.
    *
-   * @param r The row you want to access.
-   * @param c The column you want to access.
+   * @param rows The row you want to access.
+   * @param cols The column you want to access.
    *
    * @returns Element in the chosen position.
    */
-  double operator()(std::size_t r, std::size_t c) const;
+  double operator()(std::size_t rows, std::size_t cols) const;
 
   /**
    * @brief Compares two matrices for equality.
@@ -223,22 +224,22 @@ class Matrix {
   /**
    * @brief Returns a zero matrix.
    *
-   * @param r Number of rows of the matrix.
-   * @param c Number of columns of the Mamatrixtrix.
+   * @param rows Number of rows of the matrix.
+   * @param cols Number of columns of the Mamatrixtrix.
    *
    * @returns Zero matrix.
    */
-  static Matrix zeros(std::size_t r, std::size_t c);
+  static Matrix zeros(std::size_t rows, std::size_t cols);
 
   /**
    * @brief Returns a matrix filled with ones.
    *
-   * @param r Number of rows of the matrix.
-   * @param c Number of columns of the matrix.
+   * @param rows Number of rows of the matrix.
+   * @param cols Number of columns of the matrix.
    *
    * @returns A matrix filled with the number one.
    */
-  static Matrix ones(std::size_t r, std::size_t c);
+  static Matrix ones(std::size_t rows, std::size_t cols);
 
   /**
    * @brief Returns an identity matrix.
@@ -252,14 +253,15 @@ class Matrix {
   /**
    * @brief Returns matrix with random numbers.
    *
-   * @param r Number of rows of the matrix.
-   * @param c Number of columns of the matrix.
+   * @param rows Number of rows of the matrix.
+   * @param cols Number of columns of the matrix.
    * @param min_val The minimum number a chosen value can assume. Defalt value of 0.0.
    * @param max The maximum number a chosen value can assume. Defalt value of 1.0.
    *
    * @returns A matrix with random values.
    */
-  static Matrix random(std::size_t r, std::size_t c, double min_val = 0.0, double max_value = 1.0);
+  static Matrix random(std::size_t rows, std::size_t cols, double min_val = 0.0,
+                       double max_value = 1.0);
 
   /**
    * @brief Transposes the matrix.

@@ -1,4 +1,5 @@
 #include <catch2/catch_test_macros.hpp>
+#include <iostream>
 #include <orion/matrix.hpp>
 
 TEST_CASE("Matrix initialization and basic properties", "[matrix][constructors]") {
@@ -6,7 +7,7 @@ TEST_CASE("Matrix initialization and basic properties", "[matrix][constructors]"
   orion::Matrix B{{1, 2}, {3, 4}};
 
   SECTION("Verify Matrix size") {
-    REQUIRE(B.rows() == 2);
+    REQUIRE(A.rows() == 2);
     REQUIRE(A.cols() == 2);
 
     REQUIRE(B.rows() == 2);
@@ -23,21 +24,42 @@ TEST_CASE("Matrix initialization and basic properties", "[matrix][constructors]"
 
   SECTION("Verify rows with different size") {
     REQUIRE_THROWS_AS((orion::Matrix{{1, 2}, {1}}), orion::InvalidMatrixDimensions);
+    REQUIRE_THROWS_AS((orion::Matrix{{1, 2}, {1, 2}, {1, 2, 3}}), orion::InvalidMatrixDimensions);
+  }
+
+  SECTION("Verify default value in matrix initialization") {
+    orion::Matrix C(2, 2);
+    orion::Matrix D{{0.0, 0.0}, {0.0, 0.0}};
+
+    REQUIRE(C == D);
   }
 }
 
 TEST_CASE("Matrix element access", "[matrix][access]") {
   orion::Matrix A{{1, 2}, {3, 4}};
 
-  SECTION("Verify access and get operator '()'") {
+  SECTION("Verify access operator '()'") {
     REQUIRE(A(0, 0) == 1);
     REQUIRE(A(0, 1) == 2);
     REQUIRE(A(1, 0) == 3);
     REQUIRE(A(1, 1) == 4);
   }
 
+  SECTION("Verify get operator '()'") {
+    A(0, 0) = 0;
+    A(0, 1) = 0;
+    A(1, 0) = 0;
+    A(1, 1) = 0;
+
+    orion::Matrix B(2, 2);
+
+    REQUIRE(A == B);
+  }
+
   SECTION("Operator '()' must throw exception") {
     REQUIRE_THROWS_AS(A(3, 3), orion::PositionNotInMatrix);
+    REQUIRE_THROWS_AS(A(0, 3), orion::PositionNotInMatrix);
+    REQUIRE_THROWS_AS(A(3, 0), orion::PositionNotInMatrix);
   }
 }
 
@@ -50,9 +72,14 @@ TEST_CASE("Matrix fills methods", "[matrix][fill]") {
     orion::Matrix D{{0, 2}, {4, 6}};
 
     A.fill(5);
+
+    REQUIRE(A.rows() == 2);
+    REQUIRE(A.cols() == 2);
     REQUIRE(A == C);
 
     B.fillRange(0, 2);
+    REQUIRE(B.rows() == 2);
+    REQUIRE(B.cols() == 2);
     REQUIRE(B == D);
   }
 }
@@ -66,6 +93,8 @@ TEST_CASE("Matrix arithmetic operations", "[matrix][math]") {
     orion::Matrix C{{6, 8}, {10, 12}};
 
     REQUIRE((A + B) == C);
+    REQUIRE(C.rows() == 2);
+    REQUIRE(C.cols() == 2);
     REQUIRE_THROWS_AS(A + K, orion::InvalidMatrixDimensions);
   }
 
@@ -73,6 +102,8 @@ TEST_CASE("Matrix arithmetic operations", "[matrix][math]") {
     orion::Matrix C{{-4, -4}, {-4, -4}};
 
     REQUIRE((A - B) == C);
+    REQUIRE(C.rows() == 2);
+    REQUIRE(C.cols() == 2);
     REQUIRE_THROWS_AS(A - K, orion::InvalidMatrixDimensions);
   }
 
@@ -81,9 +112,21 @@ TEST_CASE("Matrix arithmetic operations", "[matrix][math]") {
     orion::Matrix D{{2, 4}, {6, 8}};
 
     REQUIRE((A * B) == C);
+    REQUIRE(C.rows() == 2);
+    REQUIRE(C.cols() == 2);
     REQUIRE_THROWS_AS(A * K, orion::InvalidMatrixDimensions);
 
     REQUIRE((A * 2) == D);
+    REQUIRE(D.rows() == 2);
+    REQUIRE(D.cols() == 2);
+  }
+
+  SECTION("Verify (*) with different matrices sizes") {
+    orion::Matrix C(2, 3, 1);
+    orion::Matrix D(3, 2, 1);
+    orion::Matrix E(2, 2, 3);
+
+    REQUIRE(C * D == E);
   }
 }
 
@@ -93,13 +136,32 @@ TEST_CASE("Test Random methods", "[matrix][random]") {
     orion::Matrix B{{1, 2}, {3, 4}};
 
     A.fillRandom();
+    REQUIRE(A(0, 0) >= 0);
+    REQUIRE(A(0, 0) <= 1);
+    REQUIRE(A(0, 1) >= 0);
+    REQUIRE(A(0, 1) <= 1);
+    REQUIRE(A(1, 0) >= 0);
+    REQUIRE(A(1, 0) <= 1);
+    REQUIRE(A(1, 1) >= 0);
+    REQUIRE(A(1, 1) <= 1);
+    REQUIRE(A.rows() == 2);
+    REQUIRE(A.cols() == 2);
     REQUIRE(A != B);
   }
 
   SECTION("Verify random() factory function") {
-    orion::Matrix B{{1, 2}, {3, 4}};
+    orion::Matrix A = orion::Matrix::random(2, 2);
 
-    REQUIRE(orion::Matrix::random(2, 2) != B);
+    REQUIRE(A(0, 0) >= 0);
+    REQUIRE(A(0, 0) <= 1);
+    REQUIRE(A(0, 1) >= 0);
+    REQUIRE(A(0, 1) <= 1);
+    REQUIRE(A(1, 0) >= 0);
+    REQUIRE(A(1, 0) <= 1);
+    REQUIRE(A(1, 1) >= 0);
+    REQUIRE(A(1, 1) <= 1);
+    REQUIRE(A.rows() == 2);
+    REQUIRE(A.cols() == 2);
   }
 }
 
@@ -110,6 +172,11 @@ TEST_CASE("Other Matrix methods", "[matrix][other]") {
     orion::Matrix B{{1, 3}, {2, 4}};
 
     REQUIRE(A.transpose() == B);
+
+    orion::Matrix C{{1, 2, 3}, {4, 5, 6}};
+    orion::Matrix D{{1, 4}, {2, 5}, {3, 6}};
+
+    REQUIRE(C.transpose() == D);
   }
 
   SECTION("Verify setIdentity() method") {

@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,31,144,56"/>
+<area shape="rect" id="Node000001" href="$classorion_1_1Exception.html" title=" " alt="" coords="192,31,319,56"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="158,41,192,41,192,46,158,46"/>
+<area shape="rect" id="Node000002" href="$classorion_1_1InvalidMatrixDimensions.html" title=" " alt="" coords="367,5,593,31"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="332,32,367,28,368,33,333,37"/>
+<area shape="rect" id="Node000003" href="$classorion_1_1PositionNotInMatrix.html" title=" " alt="" coords="384,55,576,80"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="333,49,384,54,384,60,332,54"/>
+</map>

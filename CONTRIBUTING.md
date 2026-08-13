@@ -26,7 +26,7 @@ This project has a [Code of Conduct](CODE_OF_CONDUCT.md) that everyone must foll
 - [README](README.md)
 - [CHANGELOG](CHANGELOG.md)
 - [PR Template](.github/PULL_REQUEST_TEMPLATE.md)
-- [Issues Template](.github/ISSUE_TEMPLATE/bug_report.yml)
+- [SECURITY](SECURITY.md)
 
 ## Setting Up the Environment
 

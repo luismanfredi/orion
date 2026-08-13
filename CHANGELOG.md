@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0-alpha.3] - 2026-08-12
+
+### Added
+
+- `SECURITY.md`.
+- `CONTIRBUTING.md`.
+- `CODE_OF_CONDUCT.md`.
+- Pull request template.
+- Issues template for bug report and feature request.
+- Matrix call `operator ()`.
+- Factory functions for `identity()`, `zeros()`, `ones()` and `random()`.
+- The following methods: `setIdentity()`, `setZeros()`, `setOnes()` and `fillRandom()`.
+- `operator !=`.
+- API generated documentation with Doxygen.
+
+### Changed
+
+- Better performance.
+- Improved tests.
+
 ## [0.1.0-alpha.2] - 2026-08-07
 
 ### Added

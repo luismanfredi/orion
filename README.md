@@ -88,7 +88,7 @@ Run the example
 
 ## Contributing
 
-Contribuitions, suggestions, and bug reports are welcom. See [CONTRIBUTING.md](CONTRIBUTING.md) for the development workflow, coding style, and commit conventions used in this project.
+Contributions, suggestions, and bug reports are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the development workflow, coding style, and commit conventions used in this project.
 
 ## License
 

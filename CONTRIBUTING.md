@@ -65,9 +65,9 @@ The `main` branch is protected and does not accept direct pushes. All changes mu
 Here is the expected Git workflow to contribute:
 
 1. **Fork the repository:** Click the "Fork" button at the top right of this page.
-2. **Clone your fork:** `git clone https://github.com/YOUR_USERNAME/orion.git`
+2. **Clone your fork:** `git clone https://github.com/luis_manfredi/orion.git`
 3. **Create a branch:** Use a descriptive name categorized by the type of work you are doing. We use prefixes similar to our commits (e.g., `docs/`, `feature/`, `fix/`, `refactor/`). 
-   * *Example:* `git checkout -b feat/matrix-multiplication`
+   * *Example:* `git switch -c feat/matrix-multiplication`
 4. **Make your changes:** Write your code, add tests, and ensure everything builds correctly.
 5. **Commit your changes:** Orion follows the [Conventional Commits](https://www.conventionalcommits.org/) specification. 
    * *Format:* `<type>(<scope>): <description>`
@@ -75,7 +75,7 @@ Here is the expected Git workflow to contribute:
      * `fix(matrix): resolve out-of-bounds error in addition`
      * `feat(core): add inverse matrix calculation`
      * `docs(readme): update build instructions`
-6. **Push to your fork:** `git push origin feature/matrix-multiplication`
+6. **Push to your fork:** `git push origin feat/matrix-multiplication`
 7. **Open a Pull Request:** Go to the original Orion repository and click "Compare & pull request". Please fill out the PR Template completely.
 
 ## Style Guide

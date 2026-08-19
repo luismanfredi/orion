@@ -11,15 +11,16 @@ A modern C++ library for linear algebra, designed for learning, experimentation,
 
 ## Features
 
-Current (`v0.1.0-alpha.2`)
+Current (`v0.1.0-alpha.3`)
 
 - Matrix construction: empty, sized, with initial values and from initializer lists.
-- Bounds-checked element acess via `get()` / `set()`.
-- Fill operations: `fill()` and `fillRange`.
+- Fill operations: `fill()`, `fillRange()` and `fillRandom()`.
 - Arithmetic: addition, subtraction, matrix multiplication, scalar multiplication.
 - Matrix transpose.
-- Equality operator (`operator==`).
-- Stream output (`operator<<`).
+- Set functions: `setZeros()`, `setOnes()` and `setIdentity()`.
+- Equality and inequality operator (`operator==` and `operator!=`).
+- Factory functions: `zeros()`, `ones()`, `identity()` and `random()`.
+- Stream output: `operator<<`.
 - Tests with CTest.
 - Github Workflows.
 - Basic examples.

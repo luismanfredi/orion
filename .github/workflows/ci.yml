@@ -30,3 +30,27 @@ jobs:
       - name: Run tests with CTest
         run: |
           ctest --test-dir build --output-on-failure
+
+  clang-tidy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies and compiler
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake ninja-build clang-tidy
+
+      - name: CMake config
+        run: |
+          cmake -B build -G Ninja \
+          -DCMAKE_BUILD_TYPE=Debug \
+          -DCMAKE_CXX_STANDARD=20 \
+          -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+
+      - name: Run clang-tidy
+        run: |
+          clang-tidy --version
+          clang-tidy -p build --warnings-as-errors='*' $(find src tests -name '*.cpp')

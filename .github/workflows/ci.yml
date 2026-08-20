@@ -14,22 +14,39 @@ jobs:
       - name: Code checkout
         uses: actions/checkout@v4
 
-      - name: Install dependecies and compiler
+      - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential cmake ninja-build
+          sudo apt-get install -y build-essential cmake ninja-build gcovr clang llvm
 
-      - name: CMake config
+      - name: Configure CMake
         run: |
-          cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_STANDARD=20
+          cmake -S . -B build \
+            -G Ninja \
+            -DCMAKE_BUILD_TYPE=Debug \
+            -DCMAKE_C_COMPILER=clang \
+            -DCMAKE_CXX_COMPILER=clang++ \
+            -DCMAKE_CXX_FLAGS="--coverage -O0 -g"
 
-      - name: Compile
-        run: |
-          cmake --build build
+      - name: Build
+        run: cmake --build build
 
-      - name: Run tests with CTest
+      - name: Run tests
+        run: ctest --test-dir build --output-on-failure
+
+      - name: Generate coverage report
         run: |
-          ctest --test-dir build --output-on-failure
+          gcovr -r . \
+            --gcov-executable "llvm-cov gcov" \
+            --exclude-directories 'build' \
+            --xml-pretty \
+            -o coverage.xml
+
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./coverage.xml
+          fail_ci_if_error: true
 
   clang-tidy:
     runs-on: ubuntu-latest

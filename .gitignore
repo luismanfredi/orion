@@ -1,1 +1,6 @@
 build/
+coverage.xml
+coverage/
+*.gcda
+*.gcno
+*.gcov

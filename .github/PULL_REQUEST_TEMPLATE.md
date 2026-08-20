@@ -14,6 +14,7 @@ Closes #
 - [ ] Refactoring (`refactor`: no functional changes, no API changes)
 - [ ] Documentation update (`docs`: changes to README, etc.)
 - [ ] Performance improvement (`perf`: speeds up code)
+- [ ] Continuous Integration (`ci`: add clang-tidy checks)
 - [ ] Tests (`test`: adding missing tests or correcting existing ones)
 
 ## Checklist

@@ -56,7 +56,7 @@ class Matrix {
    *
    * @throws PositionNotInMatrix If the linear index doesn't exists in the matrix.
    */
-  std::size_t index(std::size_t row, std::size_t col) const;
+  [[nodiscard]] std::size_t index(std::size_t row, std::size_t col) const;
 
  public:
   /**
@@ -127,14 +127,14 @@ class Matrix {
    *
    * @returns Number of rows in matrix.
    */
-  std::size_t rows() const;
+  [[nodiscard]] std::size_t rows() const;
 
   /**
    * @brief Returns the number of columns of the matrix.
    *
    * @returns Number of columns in matrix.
    */
-  std::size_t cols() const;
+  [[nodiscard]] std::size_t cols() const;
 
   /**
    * @brief Add two Matrices.
@@ -270,7 +270,7 @@ class Matrix {
    *
    * @returns The matrix transposed.
    */
-  Matrix transpose() const;
+  [[nodiscard]] Matrix transpose() const;
 
   /**
    * @brief Inserts a matrix into an output stream.

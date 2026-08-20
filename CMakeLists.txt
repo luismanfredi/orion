@@ -88,3 +88,13 @@ target_compile_options(orion_tests
 # Integrate Catch2 tests into the CTest runner
 include(Catch)
 catch_discover_tests(orion_tests)
+
+# ------------------------------------
+# .clang-tidy configuration
+# ------------------------------------
+
+find_program(CLANG_TIDY clang-tidy)
+
+if(CLANG_TIDY)
+    set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY})
+endif()

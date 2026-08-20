@@ -165,9 +165,9 @@ bool Matrix::operator!=(const Matrix& other) const {
   return false;
 }
 
-Matrix Matrix::zeros(std::size_t rows, std::size_t cols) { return Matrix(rows, cols); }
+Matrix Matrix::zeros(std::size_t rows, std::size_t cols) { return {rows, cols}; }
 
-Matrix Matrix::ones(std::size_t rows, std::size_t cols) { return Matrix(rows, cols, 1.0); }
+Matrix Matrix::ones(std::size_t rows, std::size_t cols) { return {rows, cols, 1.0}; }
 
 Matrix Matrix::identity(std::size_t size) {
   Matrix result(size, size);
@@ -179,6 +179,7 @@ Matrix Matrix::identity(std::size_t size) {
   return result;
 }
 
+// NOLINTNEXTLINE(bugprone-easily-swappable-parameters)
 Matrix Matrix::random(std::size_t rows, std::size_t cols, double min_val, double max_value) {
   Matrix result(rows, cols);
   result.fillRandom(min_val, max_value);

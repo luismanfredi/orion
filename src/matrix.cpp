@@ -90,16 +90,27 @@ Matrix Matrix::hadamard(const Matrix& other) const {
 }
 
 Matrix Matrix::operator+(const Matrix& other) const {
-  if (rows_ != other.rows_ || cols_ != other.cols_) {
-    throw InvalidMatrixDimensions("Matrix must be same dimensions!");
+  if (rows_ == other.rows_ && cols_ == other.cols_) {
+    Matrix result(rows_, cols_);
+    for (std::size_t i = 0; i < data_.size(); ++i) {
+      result.data_[i] = data_[i] + other.data_[i];
+    }
+    return result;
   }
 
-  Matrix result(rows_, cols_);
-
-  for (std::size_t i = 0; i < data_.size(); ++i) {
-    result.data_[i] = data_[i] + other.data_[i];
+  else if (other.rows_ == 1 && cols_ == other.cols_) {
+    Matrix result(rows_, cols_);
+    for (std::size_t i = 0; i < rows_; ++i) {
+      for (std::size_t j = 0; j < cols_; ++j) {
+        result.data_[i * cols_ + j] = data_[i * cols_ + j] + other.data_[j];
+      }
+    }
+    return result;
   }
-  return result;
+
+  else {
+    throw InvalidMatrixDimensions("Incompatible matrix dimensions!");
+  }
 }
 
 Matrix Matrix::operator-(const Matrix& other) const {

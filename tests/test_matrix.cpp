@@ -107,6 +107,16 @@ TEST_CASE("Matrix arithmetic operations", "[matrix][math]") {
     REQUIRE_THROWS_AS(A + K, orion::InvalidMatrixDimensions);
   }
 
+  SECTION("Verify sum (+) operator with row vector") {
+    orion::Matrix C(1, 2, 1);
+    orion::Matrix D{{2, 3}, {4, 5}};
+
+    REQUIRE((A + C) == D);
+    REQUIRE(D.rows() == 2);
+    REQUIRE(D.cols() == 2);
+    REQUIRE_NOTHROW(A + C);
+  }
+
   SECTION("Verify subtraction (-) operator") {
     orion::Matrix C{{-4, -4}, {-4, -4}};
 

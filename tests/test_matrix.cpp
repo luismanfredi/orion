@@ -89,6 +89,15 @@ TEST_CASE("Matrix arithmetic operations", "[matrix][math]") {
   orion::Matrix B{{5, 6}, {7, 8}};
   orion::Matrix K(5, 5);
 
+  SECTION("Verify hadamard() method") {
+    orion::Matrix C{{5, 12}, {21, 32}};
+
+    REQUIRE(A.hadamard(B) == C);
+    REQUIRE(C.rows() == 2);
+    REQUIRE(C.cols() == 2);
+    REQUIRE_THROWS_AS(A.hadamard(K), orion::InvalidMatrixDimensions);
+  }
+
   SECTION("Verify sum (+) operator") {
     orion::Matrix C{{6, 8}, {10, 12}};
 

@@ -183,6 +183,8 @@ class Matrix {
    */
   Matrix operator*(double scalar) const;
 
+  Matrix operator/(double scalar) const;
+
   /**
    * @brief Provides access to a matrix element using Matrix(row, column).
    *

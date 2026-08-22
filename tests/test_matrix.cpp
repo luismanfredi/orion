@@ -147,6 +147,14 @@ TEST_CASE("Matrix arithmetic operations", "[matrix][math]") {
 
     REQUIRE(C * D == E);
   }
+
+  SECTION("Verify division (/) operator") {
+    orion::Matrix C{{0.5, 1.0}, {1.5, 2.0}};
+
+    REQUIRE((A / 2) == C);
+    REQUIRE(C.rows() == 2);
+    REQUIRE(C.cols() == 2);
+  }
 }
 
 TEST_CASE("Test Random methods", "[matrix][random]") {

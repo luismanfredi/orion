@@ -157,6 +157,15 @@ Matrix Matrix::operator*(double scalar) const {
 
 Matrix operator*(double scalar, const Matrix& matrix) { return matrix * scalar; }
 
+Matrix Matrix::operator/(double scalar) const {
+  Matrix result(rows_, cols_);
+
+  for (std::size_t i = 0; i < data_.size(); ++i) {
+    result.data_[i] = data_[i] / scalar;
+  }
+  return result;
+}
+
 double& Matrix::operator()(std::size_t rows, std::size_t cols) { return data_[index(rows, cols)]; }
 
 double Matrix::operator()(std::size_t rows, std::size_t cols) const {

@@ -138,6 +138,10 @@ class Matrix {
 
   [[nodiscard]] double sum() const;
 
+  [[nodiscard]] double mean() const;
+
+  [[nodiscard]] double sum(int axis) const;
+
   [[nodiscard]] Matrix hadamard(const Matrix& other) const;
 
   /**

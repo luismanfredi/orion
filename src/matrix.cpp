@@ -85,6 +85,14 @@ double Matrix::sum() const {
   return result;
 }
 
+double Matrix::mean() const {
+  double sum = this->sum();
+
+  double result = sum / static_cast<double>(data_.size());
+
+  return result;
+}
+
 Matrix Matrix::hadamard(const Matrix& other) const {
   if (rows_ != other.rows_ || cols_ != other.cols_) {
     throw InvalidMatrixDimensions("Matrix must be same dimensions!");

@@ -136,6 +136,8 @@ class Matrix {
    */
   [[nodiscard]] std::size_t cols() const;
 
+  [[nodiscard]] double sum() const;
+
   [[nodiscard]] Matrix hadamard(const Matrix& other) const;
 
   /**

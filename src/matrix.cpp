@@ -76,6 +76,15 @@ std::size_t Matrix::rows() const { return rows_; }
 
 std::size_t Matrix::cols() const { return cols_; }
 
+double Matrix::sum() const {
+  double result = 0.0;
+
+  for (double value : data_) {
+    result += value;
+  }
+  return result;
+}
+
 Matrix Matrix::hadamard(const Matrix& other) const {
   if (rows_ != other.rows_ || cols_ != other.cols_) {
     throw InvalidMatrixDimensions("Matrix must be same dimensions!");

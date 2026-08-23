@@ -85,6 +85,32 @@ double Matrix::sum() const {
   return result;
 }
 
+Matrix Matrix::sum(int axis) const {
+  if (axis == 0) {
+    Matrix result(1, cols_);
+
+    for (std::size_t i = 0; i < rows_; ++i) {
+      for (std::size_t j = 0; j < cols_; ++j) {
+        result(0, j) += (*this)(i, j);
+      }
+    }
+    return result;
+  } else if (axis == 1) {
+    Matrix result(rows_, 1);
+
+    for (std::size_t i = 0; i < rows_; ++i) {
+      for (std::size_t j = 0; j < cols_; ++j) {
+        result(i, 0) += (*this)(i, j);
+      }
+    }
+    return result;
+  }
+
+  throw InvalidAxis(
+      "Invalid Axis value. 0 to sums vertically down the rows, 1 to sums horizontally across the "
+      "columns.");
+}
+
 double Matrix::mean() const {
   double sum = this->sum();
 
@@ -146,7 +172,8 @@ Matrix Matrix::operator-(const Matrix& other) const {
 Matrix Matrix::operator*(const Matrix& other) const {
   if (cols_ != other.rows_) {
     throw InvalidMatrixDimensions(
-        "The number of columns of the first Matrix must be equal the number of rows of the second "
+        "The number of columns of the first Matrix must be equal the number of rows of the "
+        "second "
         "Matrix");
   }
 

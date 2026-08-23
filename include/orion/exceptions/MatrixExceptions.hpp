@@ -17,4 +17,9 @@ class PositionNotInMatrix : public Exception {
   explicit PositionNotInMatrix(const std::string& msg) : Exception("Matrix Error: " + msg) {}
 };
 
+class InvalidAxis : public Exception {
+ public:
+  explicit InvalidAxis(const std::string& msg) : Exception("Matrix Error: " + msg) {}
+};
+
 }  // namespace orion

@@ -84,6 +84,56 @@ TEST_CASE("Matrix fills methods", "[matrix][fill]") {
   }
 }
 
+TEST_CASE("Matrix sum and mean methods") {
+  orion::Matrix A{{1, 2}, {3, 4}};
+  orion::Matrix B(3, 3);
+  orion::Matrix C(1, 1, 1);
+
+  SECTION("Verify sum() method") {
+    REQUIRE(A.sum() == 10);
+    REQUIRE(B.sum() == 0);
+    REQUIRE(C.sum() == 1);
+
+    B.fillRange(1, 1);
+    REQUIRE(B.sum() == 45);
+
+    C.fill(10);
+    REQUIRE(C.sum() == 10);
+  }
+
+  SECTION("Verify mean() method") {
+    REQUIRE(A.mean() == 2.5);
+    REQUIRE(B.mean() == 0);
+    REQUIRE(C.mean() == 1);
+
+    B.fillRange(1, 1);
+    REQUIRE(B.mean() == 5);
+
+    C.fill(10);
+    REQUIRE(C.mean() == 10);
+  }
+
+  SECTION("Verify sum(axis) method") {
+    orion::Matrix D{{4.0, 6.0}};
+    orion::Matrix E{{3.0}, {7.0}};
+    orion::Matrix F{{1.0, 1.0}};
+    orion::Matrix G{{1.0}, {1.0}};
+
+    REQUIRE(A.sum(0) == D);
+    REQUIRE(D.rows() == 1);
+    REQUIRE(D.cols() == 2);
+
+    REQUIRE(A.sum(1) == E);
+    REQUIRE(E.rows() == 2);
+    REQUIRE(E.cols() == 1);
+
+    REQUIRE(F.sum(0) == F);
+    REQUIRE(G.sum(1) == G);
+
+    REQUIRE_THROWS_AS(A.sum(2), orion::InvalidAxis);
+  }
+}
+
 TEST_CASE("Matrix arithmetic operations", "[matrix][math]") {
   orion::Matrix A{{1, 2}, {3, 4}};
   orion::Matrix B{{5, 6}, {7, 8}};

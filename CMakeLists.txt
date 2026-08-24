@@ -127,3 +127,8 @@ set_target_properties(orion_python PROPERTIES
     PREFIX ""
     OUTPUT_NAME "orion"
 )
+
+install(TARGETS orion_python
+    LIBRARY DESTINATION .
+    RUNTIME DESTINATION .
+)

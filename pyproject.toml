@@ -1,0 +1,16 @@
+[build-system]
+requires = ["scikit-build-core>=0.7.0", "cmake>=3.20", "ninja"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "orion"
+version = "0.1.0"
+description = "Orion — C++ linear algebra (Python bindings)"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [{name = "Luís Antonio Manfredi Sodré", email = "luismanfredi920@gmail.com"}]
+classifiers = ["Programming Language :: Python :: 3", "Programming Language :: C++"]
+dependencies = []
+
+[tool.scikit-build]
+cmake.build-type = "Release"

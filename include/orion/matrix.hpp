@@ -79,6 +79,8 @@ class Matrix {
    */
   Matrix(std::initializer_list<std::initializer_list<double>> values);
 
+  Matrix(std::vector<std::vector<double>> values);
+
   /**
    * @brief Fill the entire matrix with a chosen value.
    *

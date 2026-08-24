@@ -29,6 +29,24 @@ Matrix::Matrix(std::initializer_list<std::initializer_list<double>> values) {
   }
 }
 
+Matrix::Matrix(std::vector<std::vector<double>> values) {
+  rows_ = values.size();
+  if (rows_ == 0) {
+    cols_ = 0;
+    return;
+  }
+  cols_ = values[0].size();
+  for (const auto& row : values) {
+    if (row.size() != cols_) {
+      throw InvalidMatrixDimensions("Invalid Matrix dimensions!");
+    }
+  }
+  data_.reserve(rows_ * cols_);
+  for (const auto& row : values) {
+    data_.insert(data_.end(), row.begin(), row.end());
+  }
+}
+
 std::size_t Matrix::index(std::size_t row, std::size_t col) const {
   if (row >= rows_ || col >= cols_) {
     throw PositionNotInMatrix("Position (" + std::to_string(row) + ", " + std::to_string(col) +

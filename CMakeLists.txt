@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.28)
 
 project(orion VERSION 0.2.0 LANGUAGES CXX)
 
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -12,20 +13,20 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # -------------
 
 # Create Orion Library, main target
-add_library(orion
+add_library(orion_lib
     src/matrix.cpp
 )
 
-add_library(orion::orion ALIAS orion)
+add_library(orion::orion ALIAS orion_lib)
 
-target_include_directories(orion
+target_include_directories(orion_lib
     PUBLIC
         # Generators Expressions
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> # When compiling local, use include that is in the root directory
         $<INSTALL_INTERFACE:include> # Search headers in include
 )
 
-target_compile_options(orion
+target_compile_options(orion_lib
     PRIVATE 
         -Wall  
         -Wextra 
@@ -98,3 +99,31 @@ find_program(CLANG_TIDY clang-tidy)
 if(CLANG_TIDY)
     set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY})
 endif()
+
+# ------------------------------------
+# pybind11 configuration
+# ------------------------------------
+
+include(FetchContent)
+
+FetchContent_Declare(
+    pybind11
+    GIT_REPOSITORY https://github.com/pybind/pybind11.git
+    GIT_TAG        v2.13.6
+)
+
+FetchContent_MakeAvailable(pybind11)
+
+pybind11_add_module(orion_python MODULE
+    bindings/python.cpp
+)
+
+target_link_libraries(orion_python
+    PRIVATE
+        orion::orion
+)
+
+set_target_properties(orion_python PROPERTIES
+    PREFIX ""
+    OUTPUT_NAME "orion"
+)

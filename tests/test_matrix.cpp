@@ -276,6 +276,52 @@ TEST_CASE("Other Matrix methods", "[matrix][other]") {
     A.setOnes();
     REQUIRE(A == B);
   }
+
+  SECTION("Verify max() method") {
+    orion::Matrix B(100, 100, 1.5);
+    orion::Matrix C{{-1, -2}, {-3, -4}};
+
+    REQUIRE(A.max() == 4);
+    REQUIRE(B.max() == 1.5);
+    REQUIRE(C.max() == -1);
+  }
+
+  SECTION("Verify max(axis=0) method") {
+    orion::Matrix B(100, 100, 1.5);
+    orion::Matrix C{{-1, -2}, {-3, -4}};
+
+    orion::Matrix D{{3, 4}};
+    orion::Matrix E(1, 100, 1.5);
+    orion::Matrix F{{-1, -2}};
+
+    REQUIRE(A.max(0) == D);
+    REQUIRE(B.max(0) == E);
+    REQUIRE(C.max(0) == F);
+  }
+
+  SECTION("Verify max(axis=1) method") {
+    orion::Matrix B(100, 100, 1.5);
+    orion::Matrix C{{-1, -2}, {-3, -4}};
+
+    orion::Matrix D{{2}, {4}};
+    orion::Matrix E(100, 1, 1.5);
+    orion::Matrix F{{-1}, {-3}};
+
+    REQUIRE(A.max(1) == D);
+    REQUIRE(B.max(1) == E);
+    REQUIRE(C.max(1) == F);
+  }
+
+  SECTION("Verify log() method") {
+    orion::Matrix C(100, 100, 1);
+    orion::Matrix D(100, 100);
+
+    REQUIRE(C.log() == D);
+
+    orion::Matrix E(2, 2, -2);
+
+    REQUIRE_THROWS_AS(E.log(), std::domain_error);
+  }
 }
 
 TEST_CASE("Matrix factory functions", "[matrix][factory]") {

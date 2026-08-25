@@ -144,6 +144,10 @@ class Matrix {
 
   [[nodiscard]] double mean() const;
 
+  [[nodiscard]] double max() const;
+
+  [[nodiscard]] Matrix max(int axis) const;
+
   [[nodiscard]] Matrix hadamard(const Matrix& other) const;
 
   /**
@@ -283,6 +287,10 @@ class Matrix {
    * @returns The matrix transposed.
    */
   [[nodiscard]] Matrix transpose() const;
+
+  [[nodiscard]] Matrix log() const;
+
+  [[nodiscard]] Matrix exp() const;
 
   /**
    * @brief Inserts a matrix into an output stream.

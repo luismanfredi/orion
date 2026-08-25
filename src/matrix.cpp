@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <iomanip>
+#include <iostream>
 #include <random>
 #include <string>
 
@@ -135,6 +136,44 @@ double Matrix::mean() const {
   double result = sum / static_cast<double>(data_.size());
 
   return result;
+}
+
+double Matrix::max() const { return *std::max_element(data_.begin(), data_.end()); }
+
+Matrix Matrix::max(int axis) const {
+  if (axis == 0) {
+    Matrix result(1, cols_);
+
+    for (std::size_t j = 0; j < cols_; ++j) {
+      result.data_[j] = (*this)(0, j);
+    }
+
+    for (std::size_t i = 1; i < rows_; ++i) {
+      for (std::size_t j = 0; j < cols_; ++j) {
+        result.data_[j] = std::max(result.data_[j], (*this)(i, j));
+      }
+    }
+
+    return result;
+  }
+
+  if (axis == 1) {
+    Matrix result(rows_, 1);
+
+    for (std::size_t i = 0; i < rows_; ++i) {
+      result.data_[i] = (*this)(i, 0);
+    }
+
+    for (std::size_t i = 0; i < rows_; ++i) {
+      for (std::size_t j = 1; j < cols_; j++) {
+        result.data_[i] = std::max(result.data_[i], (*this)(i, j));
+      }
+    }
+
+    return result;
+  }
+
+  throw InvalidAxis("Error");
 }
 
 Matrix Matrix::hadamard(const Matrix& other) const {
@@ -289,6 +328,29 @@ Matrix Matrix::transpose() const {
       result.data_[j * rows_ + i] = data_[i * cols_ + j];
     }
   }
+
+  return result;
+}
+
+Matrix Matrix::log() const {
+  Matrix result(rows_, cols_);
+
+  std::transform(data_.begin(), data_.end(), result.data_.begin(), [](double x) {
+    if (x <= 0) {
+      throw std::domain_error("log() requires positives values.");
+    }
+    return std::log(x);
+  });
+
+  return result;
+}
+
+Matrix Matrix::exp() const {
+  Matrix result(rows_, cols_);
+
+  std::transform(data_.begin(), data_.end(), result.data_.begin(),
+                 [](double n) { return std::exp(n); });
+
   return result;
 }
 

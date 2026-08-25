@@ -288,6 +288,8 @@ class Matrix {
    */
   [[nodiscard]] Matrix transpose() const;
 
+  [[nodiscard]] Matrix log() const;
+
   /**
    * @brief Inserts a matrix into an output stream.
    *

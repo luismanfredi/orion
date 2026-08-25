@@ -328,6 +328,20 @@ Matrix Matrix::transpose() const {
       result.data_[j * rows_ + i] = data_[i * cols_ + j];
     }
   }
+
+  return result;
+}
+
+Matrix Matrix::log() const {
+  Matrix result(rows_, cols_);
+
+  std::transform(data_.begin(), data_.end(), result.data_.begin(), [](double x) {
+    if (x <= 0) {
+      throw std::domain_error("log() requires positives values.");
+    }
+    return std::log(x);
+  });
+
   return result;
 }
 

@@ -345,6 +345,15 @@ Matrix Matrix::log() const {
   return result;
 }
 
+Matrix Matrix::exp() const {
+  Matrix result(rows_, cols_);
+
+  std::transform(data_.begin(), data_.end(), result.data_.begin(),
+                 [](double n) { return std::exp(n); });
+
+  return result;
+}
+
 std::ostream& operator<<(std::ostream& os, const Matrix& mat) {
   for (std::size_t i = 0; i < mat.rows_; ++i) {
     os << "|";

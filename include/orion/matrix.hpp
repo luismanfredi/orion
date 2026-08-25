@@ -290,6 +290,8 @@ class Matrix {
 
   [[nodiscard]] Matrix log() const;
 
+  [[nodiscard]] Matrix exp() const;
+
   /**
    * @brief Inserts a matrix into an output stream.
    *

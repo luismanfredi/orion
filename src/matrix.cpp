@@ -137,6 +137,8 @@ double Matrix::mean() const {
   return result;
 }
 
+double Matrix::max() const { return *std::max_element(data_.begin(), data_.end()); }
+
 Matrix Matrix::hadamard(const Matrix& other) const {
   if (rows_ != other.rows_ || cols_ != other.cols_) {
     throw InvalidMatrixDimensions("Matrix must be same dimensions!");

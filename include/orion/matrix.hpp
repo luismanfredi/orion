@@ -144,6 +144,8 @@ class Matrix {
 
   [[nodiscard]] double mean() const;
 
+  [[nodiscard]] double max() const;
+
   [[nodiscard]] Matrix hadamard(const Matrix& other) const;
 
   /**

@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <iomanip>
+#include <iostream>
 #include <random>
 #include <string>
 
@@ -138,6 +139,42 @@ double Matrix::mean() const {
 }
 
 double Matrix::max() const { return *std::max_element(data_.begin(), data_.end()); }
+
+Matrix Matrix::max(int axis) const {
+  if (axis == 0) {
+    Matrix result(1, cols_);
+
+    for (std::size_t j = 0; j < cols_; ++j) {
+      result.data_[j] = (*this)(0, j);
+    }
+
+    for (std::size_t i = 1; i < rows_; ++i) {
+      for (std::size_t j = 0; j < cols_; ++j) {
+        result.data_[j] = std::max(result.data_[j], (*this)(i, j));
+      }
+    }
+
+    return result;
+  }
+
+  if (axis == 1) {
+    Matrix result(rows_, 1);
+
+    for (std::size_t i = 0; i < rows_; ++i) {
+      result.data_[i] = (*this)(i, 0);
+    }
+
+    for (std::size_t i = 0; i < rows_; ++i) {
+      for (std::size_t j = 1; j < cols_; j++) {
+        result.data_[i] = std::max(result.data_[i], (*this)(i, j));
+      }
+    }
+
+    return result;
+  }
+
+  throw InvalidAxis("Error");
+}
 
 Matrix Matrix::hadamard(const Matrix& other) const {
   if (rows_ != other.rows_ || cols_ != other.cols_) {

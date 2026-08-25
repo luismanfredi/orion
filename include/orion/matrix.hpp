@@ -146,6 +146,8 @@ class Matrix {
 
   [[nodiscard]] double max() const;
 
+  [[nodiscard]] Matrix max(int axis) const;
+
   [[nodiscard]] Matrix hadamard(const Matrix& other) const;
 
   /**

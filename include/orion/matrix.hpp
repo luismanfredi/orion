@@ -299,7 +299,7 @@ class Matrix {
    *
    * @param Matrix The specified matrix.
    */
-  friend std::ostream& operator<<(std::ostream&, const Matrix&);
+  friend std::ostream& operator<<(std::ostream& ostream, const Matrix& mat);
 };
 
 /**

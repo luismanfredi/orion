@@ -114,7 +114,9 @@ Matrix Matrix::sum(int axis) const {
       }
     }
     return result;
-  } else if (axis == 1) {
+  }
+
+  if (axis == 1) {
     Matrix result(rows_, 1);
 
     for (std::size_t i = 0; i < rows_; ++i) {
@@ -173,7 +175,10 @@ Matrix Matrix::max(int axis) const {
     return result;
   }
 
-  throw InvalidAxis("Error");
+  throw InvalidAxis(
+      "Invalid Axis value. 0 to get the maximum value vertically down the rows, 1 to get the "
+      "maximum value horizontally across the "
+      "columns.");
 }
 
 Matrix Matrix::hadamard(const Matrix& other) const {
@@ -198,7 +203,7 @@ Matrix Matrix::operator+(const Matrix& other) const {
     return result;
   }
 
-  else if (other.rows_ == 1 && cols_ == other.cols_) {
+  if (other.rows_ == 1 && cols_ == other.cols_) {
     Matrix result(rows_, cols_);
     for (std::size_t i = 0; i < rows_; ++i) {
       for (std::size_t j = 0; j < cols_; ++j) {
@@ -208,9 +213,7 @@ Matrix Matrix::operator+(const Matrix& other) const {
     return result;
   }
 
-  else {
-    throw InvalidMatrixDimensions("Incompatible matrix dimensions!");
-  }
+  throw InvalidMatrixDimensions("Incompatible matrix dimensions!");
 }
 
 Matrix Matrix::operator-(const Matrix& other) const {
@@ -335,11 +338,11 @@ Matrix Matrix::transpose() const {
 Matrix Matrix::log() const {
   Matrix result(rows_, cols_);
 
-  std::transform(data_.begin(), data_.end(), result.data_.begin(), [](double x) {
-    if (x <= 0) {
+  std::transform(data_.begin(), data_.end(), result.data_.begin(), [](double num) {
+    if (num <= 0) {
       throw std::domain_error("log() requires positives values.");
     }
-    return std::log(x);
+    return std::log(num);
   });
 
   return result;
@@ -349,21 +352,21 @@ Matrix Matrix::exp() const {
   Matrix result(rows_, cols_);
 
   std::transform(data_.begin(), data_.end(), result.data_.begin(),
-                 [](double n) { return std::exp(n); });
+                 [](double num) { return std::exp(num); });
 
   return result;
 }
 
-std::ostream& operator<<(std::ostream& os, const Matrix& mat) {
+std::ostream& operator<<(std::ostream& ostream, const Matrix& mat) {
   for (std::size_t i = 0; i < mat.rows_; ++i) {
-    os << "|";
+    ostream << "|";
 
     for (std::size_t j = 0; j < mat.cols_; ++j) {
-      os << std::setw(8) << mat(i, j);
+      ostream << std::setw(8) << mat(i, j);
     }
-    os << " |\n";
+    ostream << " |\n";
   }
-  return os;
+  return ostream;
 }
 
 }  // namespace orion

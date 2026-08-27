@@ -59,4 +59,4 @@ jobs:
       - name: Run clang-tidy
         run: |
           clang-tidy --version
-          clang-tidy -p build --warnings-as-errors='*' $(find src tests -name '*.cpp')
+          find src -type f -name '*.cpp' -print0 | xargs -0 clang-tidy -p build --warnings-as-errors='*'

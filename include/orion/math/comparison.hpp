@@ -7,10 +7,11 @@
 
 namespace orion {
 
-inline bool nearlyEqual(double a, double b, double absTol = kAbsTol, double relTol = kRelTol) {
-  const double diff = std::abs(a - b);
+inline bool nearlyEqual(double num1, double num2, double absTol = kAbsTol,
+                        double relTol = kRelTol) {
+  const double diff = std::abs(num1 - num2);
 
-  return diff <= std::max(absTol, relTol * std::max(std::abs(a), std::abs(b)));
+  return diff <= std::max(absTol, relTol * std::max(std::abs(num1), std::abs(num2)));
 }
 
 }  // namespace orion

@@ -3,10 +3,13 @@ Checks: >
   bugprone-*,
   performance-*,
   modernize-*,
-  -modernize-use-trailing-return-type
+  readability-*,
+  portability-*,
+  -modernize-use-trailing-return-type,
+  -readability-magic-numbers
 
 WarningsAsErrors: ""
 
-HeaderFilterRegex: "include/orion/.*"
+HeaderFilterRegex: ".*include/orion/.*"
 
 FormatStyle: file

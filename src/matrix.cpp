@@ -264,6 +264,10 @@ Matrix operator*(double scalar, const Matrix& matrix) { return matrix * scalar; 
 Matrix Matrix::operator/(double scalar) const {
   Matrix result(rows_, cols_);
 
+  if (scalar == 0) {
+    throw ZeroDivisionError("You can't divide a number by zero!.");
+  }
+
   for (std::size_t i = 0; i < data_.size(); ++i) {
     result.data_[i] = data_[i] / scalar;
   }
@@ -317,9 +321,9 @@ Matrix Matrix::identity(std::size_t size) {
 }
 
 // NOLINTNEXTLINE(bugprone-easily-swappable-parameters)
-Matrix Matrix::random(std::size_t rows, std::size_t cols, double min_val, double max_value) {
+Matrix Matrix::random(std::size_t rows, std::size_t cols, double min_val, double max_val) {
   Matrix result(rows, cols);
-  result.fillRandom(min_val, max_value);
+  result.fillRandom(min_val, max_val);
   return result;
 }
 
@@ -357,12 +361,12 @@ Matrix Matrix::exp() const {
   return result;
 }
 
-std::ostream& operator<<(std::ostream& ostream, const Matrix& mat) {
-  for (std::size_t i = 0; i < mat.rows_; ++i) {
+std::ostream& operator<<(std::ostream& ostream, const Matrix& matrix) {
+  for (std::size_t i = 0; i < matrix.rows_; ++i) {
     ostream << "|";
 
-    for (std::size_t j = 0; j < mat.cols_; ++j) {
-      ostream << std::setw(8) << mat(i, j);
+    for (std::size_t j = 0; j < matrix.cols_; ++j) {
+      ostream << std::setw(8) << matrix(i, j);
     }
     ostream << " |\n";
   }

@@ -1,9 +1,0 @@
-<map id="orion::Exception" name="orion::Exception">
-<area shape="rect" id="Node000001" title=" " alt="" coords="171,79,298,104"/>
-<area shape="rect" id="Node000003" href="$classorion_1_1InvalidMatrixDimensions.html" title=" " alt="" coords="5,152,232,177"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="206,113,139,154,136,149,203,109"/>
-<area shape="rect" id="Node000004" href="$classorion_1_1PositionNotInMatrix.html" title=" " alt="" coords="256,152,448,177"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="267,109,334,149,331,154,264,113"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="165,5,304,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="237,44,237,79,232,79,232,44"/>
-</map>

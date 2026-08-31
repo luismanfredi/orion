@@ -7,9 +7,12 @@
 
 A modern C++ library for linear algebra, designed for learning, experimentation, and future machine learning applications.
 
-You can find more information about code in [orion](docs/html/annotated.html)
-
 > ⚠️ **Beta software.** Orion is in early development. APIs may change frequently and many features are still under development.
+
+## Documentation
+
+To access more documentation of the API, check [Orion Documentation](https://luismanfredi.github.io/orion/) made with `Doxygen`.
+
 
 ## Features
 

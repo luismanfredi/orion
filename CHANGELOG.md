@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0-beta] - 2026-08-30
+
+### Added 
+
+- Broadcasting row-wise in the `operator+`.
+- The following methods: `max()`, `max(axis)`, `sum()`, `sum(axis)` and `mean()`.
+- `hadamard()` for element-wise multiplication.
+- `operator/` to divide a matrix by a scalar.
+- Bindings for Python with `pybind()`.
+- New exceptions for math cases in  `MathExceptions.hpp`.
+- `.clang-tidy` to improve code quality.
+- `exp()` and `log()`.
+- Updated the CI with `clang-tidy`.
+
 ## [0.1.0-alpha.3] - 2026-08-12
 
 ### Added

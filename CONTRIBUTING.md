@@ -80,17 +80,22 @@ Here is the expected Git workflow to contribute:
 
 ## Style Guide
 
-Orion uses `.clang-format` based on the **Google C++ Style Guide** to ensure code consistency. Please run `clang-format` on your modified files before submitting a PR.
+Orion uses `.clang-format` based on the **Google C++ Style Guide** and `.clang-tidy` to ensure code consistency. Please run `clang-format` and the following command on your modified files before submitting a PR:
+
+```bash
+find src -type f -name '*.cpp' -print0 | xargs -0 clang-tidy -p build --warnings-as-errors='*'
+```
 
 To keep the codebase clean and readable, follow these naming conventions:
 
-* **Files:** Use `snake_case` with `.hpp` for headers and `.cpp` for implementations (e.g., `matrix_operations.cpp`).
-* **Namespaces:** Use `snake_case` (e.g., `namespace orion { }`).
-* **Classes and Structs:** Use `PascalCase` (e.g., `class MatrixBase`).
-* **Functions and Methods:** Use `camelCase` (e.g., `void calculateDeterminant()`).
-* **Variables:** Use `snake_case` (e.g., `int row_count`).
-* **Class Data Members (Attributes):** Use `snake_case` with a trailing underscore (e.g., `std::vector<double> matrix_data_`).
-* **Constants:** Prefix with a lowercase `k` followed by `PascalCase` (e.g., `const int kMaxDimensions = 4`).
+- **Files:** Use `snake_case` with `.hpp` for headers and `.cpp` for implementations (e.g., `matrix_operations.cpp`).
+- **Namespaces:** Use `snake_case` (e.g., `namespace orion { }`).
+- **Classes and Structs:** Use `PascalCase` (e.g., `class MatrixBase`).
+- **Functions and Methods:** Use `camelCase` (e.g., `void calculateDeterminant()`).
+- **Variables:** Use `snake_case` (e.g., `int row_count`).
+- **Class Data Members (Attributes):** Use `snake_case` with a trailing underscore (e.g., `std::vector<double> matrix_data_`).
+- **Constants:** Prefix with a lowercase `k` followed by `PascalCase` (e.g., `const int kMaxDimensions = 4`).
+- **Exceptions:** Use `PascalCase` both for files and exceptions (e.g., `PositionNotInMatrix` and `MathExceptions.hpp`).
 
 ## Who is involved?
 

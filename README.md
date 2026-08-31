@@ -7,24 +7,28 @@
 
 A modern C++ library for linear algebra, designed for learning, experimentation, and future machine learning applications.
 
-> ⚠️ **Alpha software.** Orion is in early development. APIs may change frequently and many features are still under development.
+You can find more information about code in [orion](docs/html/annotated.html)
+
+> ⚠️ **Beta software.** Orion is in early development. APIs may change frequently and many features are still under development.
 
 ## Features
 
 Current (`v0.1.0-alpha.3`)
 
 - Matrix construction: empty, sized, with initial values and from initializer lists.
+- Bindings for Python with `pybind11`.
 - Fill operations: `fill()`, `fillRange()` and `fillRandom()`.
-- Arithmetic: addition, subtraction, matrix multiplication, scalar multiplication.
-- Matrix transpose.
+- Arithmetic: addition, subtraction, matrix multiplication, matrix multiplication-wise (`hadamard()`), scalar multiplication and division.
+- The following methods: `max()`, `max(axis)`, `sum()`, `sum(axis)` and `mean()`.
+- Matrix `transpose()`, `exp()` and `log()`.
 - Set functions: `setZeros()`, `setOnes()` and `setIdentity()`.
 - Equality and inequality operator (`operator==` and `operator!=`).
 - Factory functions: `zeros()`, `ones()`, `identity()` and `random()`.
 - Stream output: `operator<<`.
 - Tests with CTest.
-- Github Workflows.
+- Github Workflows with `clang-tidy`.
 - Basic examples.
-- Custom exceptions (`InvalidMatrixDimension`, `PositionNotInMatrix`). 
+- Custom exceptions in `MathExceptions.hpp` and `MatrixExceptions.hpp`. 
 
 See [CHANGELOG.md](CHANGELOG.md) for the full version history.
 
@@ -49,13 +53,17 @@ int main() {
 
 - A C++20 compatible compiler
 - CMake 3.28 or newer
+- Python 3.8 or newer
 
 ### Installation
+
+#### Option 1: Build from Source (C++ + Python)
 
 1. Clone the repository:
 
 ```bash
 git clone https://github.com/luismanfredi/orion.git
+cd orion
 ```
 
 2. Configure the project:
@@ -64,28 +72,97 @@ git clone https://github.com/luismanfredi/orion.git
 cmake -B build
 ```
 
-3. Build
+3. Build:
  
 ```bash
 cmake --build build
 ```
 
+#### Option 2: Install Python Package
+
+```bash
+pip install .
+```
+
+Or directly from GitHub:
+
+```bash
+pip install git+https://github.com/luismanfredi/orion.git
+```
+
 ## Running
 
-Run the example
+### C++ Example
 
-### Linux /macOS
+#### Linux/macOS
 
 ```bash
 ./build/orion_example
 ```
 
-### Windows
+#### Windows
 
 ```powershell
 .build\orion_example.exe
 ```
-*(The output may vary depending on your generator)*
+
+### Python Usage
+
+Create a file `example.py`:
+
+```python
+from orion import Matrix
+
+# Create matrices from initializer lists
+A = Matrix([[1, 2], [3, 4]])
+B = Matrix([[5, 6], [7, 8]])
+
+# Arithmetic operations
+print("A + B:")
+print(A + B)
+
+# Matrix multiplication (@ operator)
+print("\nA @ B:")
+print(A @ B)
+
+# Element-wise multiplication
+print("\nA * B (hadamard):")
+print(A * B)
+
+# Other operations
+print("\nA.transpose():")
+print(A.transpose())
+
+print("\nA.sum():")
+print(A.sum())
+
+print("\nA.mean():")
+print(A.mean())
+
+# Create matrices with factory functions
+zeros = Matrix(3, 3, 0.0)
+ones = Matrix(3, 3, 1.0)
+identity = Matrix(3, 3, 1.0)  # Use setIdentity() if available
+```
+
+Run with:
+
+```bash
+python example.py
+```
+
+## Python API
+
+The following methods are available in the Python bindings:
+
+- **Construction**: `Matrix(rows, cols, initial_value)`, `Matrix([[...], [...]])`
+- **Properties**: `rows()`, `cols()`
+- **Arithmetic**: `+`, `-`, `@` (matrix multiplication), `*` (element-wise), `/`
+- **Methods**: `transpose()`, `mean()`, `sum()`, `sum(axis)`
+- **Indexing**: `matrix[i, j]` to get/set elements
+- **Comparison**: `==`, `!=`
+
+
 
 ## Contributing
 
